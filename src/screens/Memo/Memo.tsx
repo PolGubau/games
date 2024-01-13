@@ -80,7 +80,7 @@ const Board = () => {
 
     const baseSpecs = {
       baseClassname:
-        "flex rounded-md md:rounded-2xl items-center justify-center sm:p-4 md:p-8 text-primary-900 transition-all flex-1 aspect-square ",
+        "flex  rounded-2xl items-center justify-center  md:p-8 text-primary-900 transition-all flex-1  max-w-[150px]",
     };
 
     if (isVisible(tileId))
@@ -135,8 +135,8 @@ const Board = () => {
 
   return (
     <main className="p-8 flex flex-col gap-8  items-center justify-center  ">
-      <section className="flex gap-8 flex-col sm:flex-row h-full ">
-        <div className="flex sm:flex-col gap-4  items-center sm:justify-between">
+      <section className="flex gap-8 flex-col sm:flex-row h-full w-full justify-center">
+        <div className="flex sm:flex-col gap-4 sm:items-center items-center sm:justify-between sticky top-0 h-full">
           <div className="flex sm:flex-col gap-4 items-center">
             <p className="flex justify-center items-end">
               <span className="text-4xl"> {guessed.length / 2}</span>
@@ -213,7 +213,7 @@ const Board = () => {
           initial="hidden"
           animate="visible"
           variants={list}
-          className="grid grid-cols-4 xl:grid-cols-5 gap-3 md:gap-8 rounded-2xl p-1 w-full h-full"
+          className="grid grid-cols-4 xl:grid-cols-5 md:w-fit gap-3 xl:gap-8 rounded-2xl p-1  h-full  "
         >
           {tilesData.map((tile) => {
             return (
@@ -234,7 +234,7 @@ const Board = () => {
                     : undefined,
                 }}
               >
-                <div className="opacity-70 text-4xl sm:text-7xl md:text-8xl">
+                <div className="opacity-70 text-5xl sm:text-7xl md:text-6xl lg:text-6xl xl:text-7xl ">
                   {isVisible(tile.id) ? tile.icon : <TbQuestionMark />}
                 </div>
               </motion.button>

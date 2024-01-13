@@ -37,7 +37,8 @@ const Board = () => {
 
     const typed = e.target.value.toLowerCase();
     if (
-      typed[typed.length - 1].toLowerCase() === word[typed.length - 1].toLowerCase() ||
+      typed[typed.length - 1].toLowerCase() ===
+        word[typed.length - 1].toLowerCase() ||
       !onlyWriteIfCorrect
     ) {
       setBuffer(typed);
@@ -51,7 +52,7 @@ const Board = () => {
   };
 
   return (
-    <div className="p-8 flex flex-col gap-8  items-center pt-40">
+    <div className="md:p-8 pt-8 flex flex-col gap-8 items-center md:pt-40">
       {time === 0 ? (
         <IdlePage
           characterCount={characterCount}
@@ -61,30 +62,33 @@ const Board = () => {
         />
       ) : (
         <div>
-          <p className="text-primary-900 z-10">{time}s</p>
+          <p className="text-primary-900 z-10 w-fit">{time}s</p>
           <form
             onSubmit={handleSubmit}
-            className="relative flex gap-2 items-center z-10"
+            className="relative flex gap-2 items-center z-10 w-fit "
           >
             <label
               htmlFor="word"
-              className="text-3xl md:text-4xl xl:text-7xl rounded-2xl px-2 py-1 absolute opacity-40"
+              className="text-3xl sm:text-4xl md:text-6xl xl:text-7xl rounded-2xl px-2 py-1 absolute opacity-40"
             >
               {word}
             </label>
             <input
               autoComplete="off"
               autoFocus
-              className="text-3xl md:text-4xl xl:text-7xl rounded-2xl px-2 py-1 border-none focus:outline-none bg-transparent"
+              spellCheck={false}
+              autoCapitalize="off"
+              autoCorrect="off"
+              className="text-3xl sm:text-4xl md:text-6xl xl:text-7xl rounded-2xl px-2 py-1 border-none focus:outline-none bg-transparent w-fit"
               id="word"
               type="text"
               value={buffer}
               onChange={handleChangeInput}
             />
           </form>
-          <div className="text-primary-900 z-20">{characterCount}⭐</div>
+          <div className="text-primary-900 z-20 w-fit">{characterCount}⭐</div>
           <div
-            className="fixed top-0 right-0 w-full transition-all h-full bg-primary"
+            className="fixed top-0 right-0 w-full transition-all h-full bg-primary/50  "
             style={{
               // expand the bar as time goes by (from 0 to 100%) less time = more width
               width: `${100 - (time / 60) * 100}%`,

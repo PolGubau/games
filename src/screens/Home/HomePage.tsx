@@ -8,20 +8,19 @@ const HomePage = () => {
   const games = [
     {
       name: "Memo",
-      description:
-        "Find all the pairs of tiles in the least amount of time possible",
+      description: "Find all the pairs of tiles",
       link: "/memo",
     },
     {
       name: "Words per minute",
-      description: "Type as many words as you can in 60 seconds",
+      description: "Type as many words as you can",
       link: "/words-minute",
     },
   ];
 
   return (
     <MainLayout>
-      <ul className="grid grid-cols-1 md:grid-cols-2 rounded-[70px] gap-8 justify-center h-full p-[30px] font-bold text-center">
+      <ul className="grid grid-cols-1 lg:grid-cols-2 rounded-[70px] gap-8 justify-center h-full p-[30px] font-bold text-center">
         {games.map((game) => (
           <Link to={game.link} key={game.name}>
             <motion.li
@@ -30,14 +29,12 @@ const HomePage = () => {
                 transition: { duration: 0.5, ease: "circOut" },
               }}
               whileTap={{ scale: 0.9 }}
-              className=" bg-primary shadow-lg h-full p-8 gap-8 md:p-40 rounded-3xl md:rounded-[70px] hover:brightness-110 flex flex-col"
+              className="bg-primary shadow-lg h-full lg:p-8 lg:gap-8 xl:p-20 rounded-3xl xl:rounded-[70px] hover:brightness-110 flex flex-col justify-center"
             >
-              <h3 className="text-3xl md:text-7xl text-primary-900">
+              <p className="text-lg text-primary-700">{game.description}</p>
+              <h3 className="text-3xl sm:text-5xl xl:text-7xl text-primary-900">
                 {game.name}
               </h3>
-              <p className="text-lg text-primary-700 md:px-32">
-                {game.description}
-              </p>
             </motion.li>
           </Link>
         ))}

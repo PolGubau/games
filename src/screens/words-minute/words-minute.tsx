@@ -65,7 +65,7 @@ const Board = () => {
           <p className="text-primary-900 z-10 w-fit">{time}s</p>
           <form
             onSubmit={handleSubmit}
-            className="relative flex gap-2 items-center z-10 w-fit "
+            className="relative flex gap-2 items-center z-10 w-fit"
           >
             <label
               htmlFor="word"

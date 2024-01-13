@@ -13,7 +13,7 @@ const Board = () => {
   const [word, setWord] = useState(() => getRandomWord());
 
   const validateTyped = (typed: string, target: string) => {
-    if (typed === target) {
+    if (typed.toLowerCase() === target.toLowerCase()) {
       setWord(() => getRandomWord());
       setBuffer("");
       setCharacterCount((prev) => prev + word.length);
@@ -35,9 +35,9 @@ const Board = () => {
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     // only modify the buffer if the typed character is what we expect
 
-    const typed = e.target.value;
+    const typed = e.target.value.toLowerCase();
     if (
-      typed[typed.length - 1] === word[typed.length - 1] ||
+      typed[typed.length - 1].toLowerCase() === word[typed.length - 1].toLowerCase() ||
       !onlyWriteIfCorrect
     ) {
       setBuffer(typed);

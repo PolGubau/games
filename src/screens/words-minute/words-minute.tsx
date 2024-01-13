@@ -52,7 +52,7 @@ const Board = () => {
   };
 
   return (
-    <div className="md:p-8 pt-8 flex flex-col gap-8 items-center md:pt-40">
+    <div className="p-4 pt-8 flex flex-col gap-8 items-center md:pt-40 h-auto ">
       {time === 0 ? (
         <IdlePage
           characterCount={characterCount}

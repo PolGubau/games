@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "userAgent": "*",
+    "allow": "/",
+    "disallow": "/private/"
+  },
+  "host": "https://games.polgubau.com"
+}

@@ -72,7 +72,7 @@
   "shortcuts": [
     {
       "name": "Memo",
-      "url": "https://games.polgubau.com/memo",
+      "url": "https://games.games.polgubau.com/memo",
       "icons": [
         {
           "src": "/brand/icon-192x192.png",
@@ -82,7 +82,7 @@
     },
     {
       "name": "Words Per Minute",
-      "url": "https://polgubau.com/words-minute",
+      "url": "https://games.polgubau.com/words-minute",
       "icons": [
         {
           "src": "/brand/icon-192x192.png",

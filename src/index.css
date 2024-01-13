@@ -1,15 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"), url("/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"), url("/fonts/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"), url("/fonts/Poppins-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
 :root {
   font-family: "Poppins", system-ui, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,37 +33,17 @@
 
 * {
   box-sizing: border-box;
+
   margin: 0;
+
   padding: 0;
 }
-
-h1 {
-  font-size: 3rem;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
-}
-
-h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
-}
-h3 {
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
-}
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
+.privacy-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ff4;
+  z-index: 2;
 }

@@ -12,7 +12,7 @@ import {
 } from "react-icons/fi";
 import { Tile } from "./Memo";
 
-export const tilesData: Tile[] = [
+export const initialData = [
   {
     id: "0",
     icon: <FiShoppingCart />,
@@ -63,6 +63,8 @@ export const tilesData: Tile[] = [
     icon: <FiSun />,
     color: "#ff83da",
   },
-]
+];
+
+export const tilesData: Tile[] = initialData
   .flatMap((tile) => [tile, { ...tile, id: `${tile.id}-copy` }])
   .sort(() => Math.random() - 0.5);

@@ -1,8 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { tilesData } from "./data";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, useIsPresent } from "framer-motion";
 import { twMerge } from "tailwind-merge";
-import { keyboardKey } from "@testing-library/user-event";
+import MainLayout from "../../Layouts/MainLayout";
+import {
+  PiArrowCounterClockwiseBold,
+  PiArrowLeftBold,
+  PiLightbulbBold,
+} from "react-icons/pi";
+import { TbQuestionMark } from "react-icons/tb";
+import { useMemo } from "./use-memo";
+import FinishPage from "./finish-page";
+import { Link } from "react-router-dom";
+import { Tooltip } from "pol-ui";
 
 // Each tile has an icon and a pastel color
 
@@ -14,47 +24,36 @@ export interface Tile {
 export type TileId = Tile["id"];
 
 const MemoPage = () => {
+  const isPresent = useIsPresent();
+
   return (
-    <div>
+    <MainLayout title="Memo">
       <Board />
-    </div>
+      <motion.div
+        initial={{ scaleX: 1 }}
+        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
+        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
+        style={{ originX: isPresent ? 0 : 1 }}
+        className="privacy-screen"
+      />
+    </MainLayout>
   );
 };
 
 const Board = () => {
-  const [guessed, setGuessed] = useState<TileId[]>([]); // Array of already guessed tiles
-  const [selected, setSelected] = useState<TileId[]>([]); // Array of selected tiles (max 2)
-
-  const getTile = (id: TileId) => tilesData.find((tile) => tile.id === id);
-
-  useEffect(() => {
-    if (selected.length === 2) {
-      const [first, second] = selected;
-      const firstTile = getTile(first);
-      const secondTile = getTile(second);
-
-      if (firstTile && secondTile && firstTile.icon === secondTile.icon) {
-        setGuessed([...guessed, first, second]);
-      }
-
-      const timeout = setTimeout(() => {
-        setSelected([]);
-      }, 400);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [selected]);
-
-  useEffect(() => {
-    if (guessed.length === tilesData.length) {
-      alert("You win!");
-      location.reload();
-    }
-  }, [guessed]);
-
-  const isVisible = (id: TileId) =>
-    selected.includes(id) || guessed.includes(id);
-
+  const {
+    guessed,
+    selected,
+    win,
+    hint,
+    handleReset,
+    getHint,
+    isVisible,
+    setSelected,
+    setHint,
+    hintsUsed,
+    time,
+  } = useMemo();
   const list = {
     visible: {
       opacity: 1,
@@ -81,7 +80,7 @@ const Board = () => {
 
     const baseSpecs = {
       baseClassname:
-        "flex rounded-none md:rounded-2xl aspect-square items-center justify-center  sm:p-4 md:p-8 text-black transition-all ",
+        "flex rounded-md md:rounded-2xl items-center justify-center sm:p-4 md:p-8 text-primary-900 transition-all flex-1 aspect-square ",
     };
 
     if (isVisible(tileId))
@@ -93,14 +92,20 @@ const Board = () => {
 
     return {
       ...baseSpecs,
+      rotateY: 180,
+
       whileHover: {
         scale: 0.95,
         transition: { duration: 0.1 },
       },
-      whileTap: { scale: 0.9 },
+      whileTap: {
+        scale: 0.9,
+
+        transition: { duration: 0.1 },
+      },
       className: twMerge(
         baseSpecs.baseClassname,
-        "focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-orange-700 focus-visible:ring-offset-slate-800"
+        "focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 bg-secondary focus:bg-secondary-700 text-secondary-800"
       ),
 
       onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -112,60 +117,132 @@ const Board = () => {
     };
   };
 
-  return (
-    <AnimatePresence>
-      <main className="p-8 flex flex-col gap-8  items-center justify-center bg-slate-800 overflow-hidden">
-        <h1>Memo</h1>
-        <p>
-          Gessed pairs: {guessed.length / 2} / {tilesData.length / 2}
-        </p>
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      // delete the first element of the array (oldest hint)
+      setHint((prev) => prev.slice(1));
+    }, 200);
+    return () => clearTimeout(timeout);
+  }, [hint]);
 
+  const isThisTileHinted = (id: TileId) =>
+    hint.includes(id) || hint.includes(`${id}-copy`);
+
+  if (win)
+    return (
+      <FinishPage onReset={handleReset} hintsUsed={hintsUsed} time={time} />
+    );
+
+  return (
+    <main className="p-8 flex flex-col gap-8  items-center justify-center  ">
+      <section className="flex gap-8 flex-col sm:flex-row h-full ">
+        <div className="flex sm:flex-col gap-4  items-center sm:justify-between">
+          <div className="flex sm:flex-col gap-4 items-center">
+            <p className="flex justify-center items-end">
+              <span className="text-4xl"> {guessed.length / 2}</span>
+              <span>/ {tilesData.length / 2}</span>
+            </p>
+            <Tooltip content="Return home (the game won't be saved)">
+              <Link to={"/"}>
+                <motion.button
+                  layoutId="backButton"
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: -10,
+                  }}
+                  whileTap={{
+                    scale: 0.9,
+                  }}
+                  className=" bg-primary-900 text-primary-50 rounded-full text-4xl p-4 focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 focus:outline-none flex justify-center items-center"
+                >
+                  <PiArrowLeftBold />
+                </motion.button>
+              </Link>
+            </Tooltip>{" "}
+            <Tooltip content="Reset the game">
+              <motion.button
+                layoutId="resetButton"
+                whileHover={{
+                  rotate: -10,
+                  scale: 1.1,
+                }}
+                whileTap={{
+                  scale: 0.9,
+                  rotate: -360,
+                }}
+                whileFocus={{
+                  scale: 1.1,
+                  rotate: -20,
+                }}
+                onClick={handleReset}
+                className="aspect-square  bg-primary-900 text-primary-50 rounded-full text-4xl p-4 focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 focus:outline-none flex justify-center items-center"
+              >
+                <PiArrowCounterClockwiseBold />
+              </motion.button>{" "}
+            </Tooltip>
+            <Tooltip content="Get a hint">
+              <motion.button
+                layoutId="hintButton"
+                whileHover={{
+                  rotate: -10,
+                  scale: 1.1,
+                }}
+                whileTap={{
+                  scale: 0.9,
+                }}
+                whileFocus={{
+                  scale: 1.1,
+                  rotate: -20,
+                }}
+                onClick={getHint}
+                className="aspect-square bg-primary-900 text-primary-50 rounded-full text-4xl p-4 focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 focus:outline-none flex justify-center items-center"
+              >
+                <PiLightbulbBold />
+              </motion.button>
+            </Tooltip>
+          </div>
+          {hintsUsed > 0 && (
+            <p className="md:flex hidden text-xl">
+              <span>
+                {hintsUsed} hint{hintsUsed > 1 && "s"}
+              </span>
+            </p>
+          )}
+        </div>
         <motion.ul
           initial="hidden"
           animate="visible"
           variants={list}
-          className="grid grid-cols-4 md:grid-cols-5 md:gap-8  w-full max-w-4xl rounded-2xl overflow-hidden p-2"
+          className="grid grid-cols-4 xl:grid-cols-5 gap-3 md:gap-8 rounded-2xl p-1 w-full h-full"
         >
-          {tilesData.map((tile, index: number) => {
+          {tilesData.map((tile) => {
             return (
               <motion.button
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     setSelected([...selected, tile.id]);
                   }
-
-                  if (e.key === "ArrowRight") {
-                    setSelected([...selected, tilesData[index + 1].id]);
-                  }
-
-                  if (e.key === "ArrowLeft") {
-                    setSelected([...selected, tilesData[index - 1].id]);
-                  }
-
-                  if (e.key === "ArrowUp") {
-                    setSelected([...selected, tilesData[index - 5].id]);
-                  }
-
-                  if (e.key === "ArrowDown") {
-                    setSelected([...selected, tilesData[index + 5].id]);
-                  }
                 }}
                 key={tile.id}
                 variants={item}
                 {...specs(tile)}
                 style={{
-                  backgroundColor: isVisible(tile.id) ? tile.color : "#a7a7a7",
+                  backgroundColor: isVisible(tile.id)
+                    ? tile.color
+                    : isThisTileHinted(tile.id)
+                    ? "rgba(255, 255, 255, 0.5)"
+                    : undefined,
                 }}
               >
                 <div className="opacity-70 text-4xl sm:text-7xl md:text-8xl">
-                  {isVisible(tile.id) ? tile.icon : "?"}
+                  {isVisible(tile.id) ? tile.icon : <TbQuestionMark />}
                 </div>
               </motion.button>
             );
           })}
         </motion.ul>
-      </main>
-    </AnimatePresence>
+      </section>
+    </main>
   );
 };
 

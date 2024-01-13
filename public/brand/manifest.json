@@ -4,7 +4,6 @@
   "background_color": "#ededed",
   "display": "standalone",
   "start_url": "/",
-  "scope": "https://games.polgubau.com",
   "orientation": "any",
   "lang": "en",
   "prefer_related_applications": false,
@@ -71,7 +70,7 @@
   "shortcuts": [
     {
       "name": "Memo",
-      "url": "https://games.games.polgubau.com/memo",
+      "url": "/memo",
       "icons": [
         {
           "src": "/brand/icon-192x192.png",
@@ -81,7 +80,7 @@
     },
     {
       "name": "Words Per Minute",
-      "url": "https://games.polgubau.com/words-minute",
+      "url": "/words-minute",
       "icons": [
         {
           "src": "/brand/icon-192x192.png",

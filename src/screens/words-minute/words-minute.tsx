@@ -61,7 +61,7 @@ const Board = () => {
         />
       ) : (
         <div>
-          <p className="text-slate-00 z-10">{time}</p>
+          <p className="text-primary-900 z-10">{time}s</p>
           <form
             onSubmit={handleSubmit}
             className="relative flex gap-2 items-center z-10"
@@ -82,6 +82,7 @@ const Board = () => {
               onChange={handleChangeInput}
             />
           </form>
+          <div className="text-primary-900 z-20">{characterCount}⭐</div>
           <div
             className="fixed top-0 right-0 w-full transition-all h-full bg-primary"
             style={{

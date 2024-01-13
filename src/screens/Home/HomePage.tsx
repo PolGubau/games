@@ -29,7 +29,7 @@ const HomePage = () => {
                 transition: { duration: 0.5, ease: "circOut" },
               }}
               whileTap={{ scale: 0.9 }}
-              className="bg-primary shadow-lg h-full lg:p-8 lg:gap-8 xl:p-20 rounded-3xl xl:rounded-[70px] hover:brightness-110 flex flex-col justify-center"
+              className="bg-primary shadow-lg h-full lg:p-8 xl:p-20 rounded-3xl xl:rounded-[70px] hover:brightness-110 flex flex-col justify-center"
             >
               <p className="text-lg text-primary-700">{game.description}</p>
               <h3 className="text-3xl sm:text-5xl xl:text-7xl text-primary-900">

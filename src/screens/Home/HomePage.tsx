@@ -30,15 +30,15 @@ const HomePage = () => {
                 transition: { duration: 0.5, ease: "circOut" },
               }}
               whileTap={{ scale: 0.9 }}
-              className=" bg-primary shadow-lg h-full p-8 gap-8 md:p-40 rounded-3xl md:rounded-[70px] hover:brightness-110"
+              className=" bg-primary shadow-lg h-full p-8 gap-8 md:p-40 rounded-3xl md:rounded-[70px] hover:brightness-110 flex flex-col"
             >
               <h3 className="text-3xl md:text-7xl text-primary-900">
                 {game.name}
               </h3>
-              <p className="text-lg text-primary-700 px-32">
+              <p className="text-lg text-primary-700 md:px-32">
                 {game.description}
               </p>
-            </motion.li>{" "}
+            </motion.li>
           </Link>
         ))}
       </ul>

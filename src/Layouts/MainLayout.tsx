@@ -11,7 +11,7 @@ const MainLayout = ({
 }) => {
   return (
     <main className="bg-primary p-8 w-screen h-screen grid grid-rows-[auto,1fr] gap-6 overflow-hidden">
-      <nav className="bg-secondary-50 w-full p-2 rounded-full justify-start gap-4 flex items-center">
+      <nav className="bg-secondary-50 w-full p-2 rounded-full justify-start gap-4 flex items-center z-10">
         <div className="flex gap-4 items-center bg-primary-900 h-full aspect-square rounded-full text-secondary-50 justify-center text-3xl p-4">
           <IoGameController />
         </div>{" "}

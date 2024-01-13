@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { tilesData } from "./data";
-import { motion, useIsPresent } from "framer-motion";
+import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
-import MainLayout from "../../Layouts/MainLayout";
 import {
   PiArrowCounterClockwiseBold,
   PiArrowLeftBold,
@@ -13,6 +12,7 @@ import { useMemo } from "./use-memo";
 import FinishPage from "./finish-page";
 import { Link } from "react-router-dom";
 import { Tooltip } from "pol-ui";
+import BoardLayout from "../../Layouts/BoardLayout";
 
 // Each tile has an icon and a pastel color
 
@@ -24,19 +24,10 @@ export interface Tile {
 export type TileId = Tile["id"];
 
 const MemoPage = () => {
-  const isPresent = useIsPresent();
-
   return (
-    <MainLayout title="Memo">
+    <BoardLayout title="Memo">
       <Board />
-      <motion.div
-        initial={{ scaleX: 1 }}
-        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
-        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
-        style={{ originX: isPresent ? 0 : 1 }}
-        className="privacy-screen"
-      />
-    </MainLayout>
+    </BoardLayout>
   );
 };
 

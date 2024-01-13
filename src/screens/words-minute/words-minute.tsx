@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { getRandomWord } from "./utilities";
-import { Button, Checkbox } from "pol-ui";
-import { motion, useIsPresent } from "framer-motion";
+import IdlePage from "./idle-page";
+import BoardLayout from "../../Layouts/BoardLayout";
 
-const WordsMinutePage = () => {
+const Board = () => {
   const [characterCount, setCharacterCount] = useState(0);
   const [buffer, setBuffer] = useState("");
-  const isPresent = useIsPresent();
 
   const [onlyWriteIfCorrect, setOnlyWriteIfCorrect] = useState<boolean>(true);
 
@@ -47,65 +46,60 @@ const WordsMinutePage = () => {
     validateTyped(typed, word);
   };
 
-  return (
-    <main className="p-8 flex flex-col gap-8  items-center justify-center">
-      {time > 0 && <p className="text-slate-00">{time}</p>}
-      <h1>Characters typed : {characterCount}</h1>
-      {time === 0 ? (
-        <>
-          <label className="flex gap-2 items-center">
-            <Checkbox
-              checked={onlyWriteIfCorrect}
-              onChange={() => {
-                setOnlyWriteIfCorrect((prev) => !prev);
-              }}
-            />
-            Only write if correct
-          </label>
+  const toggleOnlyWriteIfCorrect = () => {
+    setOnlyWriteIfCorrect((prev) => !prev);
+  };
 
-          <Button autoFocus onClick={() => setTime(60)}>
-            Start
-          </Button>
-        </>
+  return (
+    <div className="p-8 flex flex-col gap-8  items-center pt-40">
+      {time === 0 ? (
+        <IdlePage
+          characterCount={characterCount}
+          toggleOnlyWriteIfCorrect={toggleOnlyWriteIfCorrect}
+          setTime={setTime}
+          onlyWriteIfCorrect={onlyWriteIfCorrect}
+        />
       ) : (
         <div>
+          <p className="text-slate-00 z-10">{time}</p>
           <form
             onSubmit={handleSubmit}
-            className="relative flex gap-2 items-center"
+            className="relative flex gap-2 items-center z-10"
           >
             <label
               htmlFor="word"
-              className="text-3xl md:text-4xl xl:text-5xl rounded-2xl px-2 py-1 absolute opacity-40"
+              className="text-3xl md:text-4xl xl:text-7xl rounded-2xl px-2 py-1 absolute opacity-40"
             >
               {word}
             </label>
             <input
               autoComplete="off"
               autoFocus
-              className="text-3xl md:text-4xl xl:text-5xl rounded-2xl px-2 py-1 "
+              className="text-3xl md:text-4xl xl:text-7xl rounded-2xl px-2 py-1 border-none focus:outline-none bg-transparent"
               id="word"
               type="text"
               value={buffer}
               onChange={handleChangeInput}
             />
-            <button type="submit">Enter</button>
           </form>
           <div
-            className=" fixed top-0 left-0 w-full transition-all h-full -z-10 bg-slate-700"
+            className="fixed top-0 right-0 w-full transition-all h-full bg-primary"
             style={{
-              width: `${(time / 60) * 100}%`,
+              // expand the bar as time goes by (from 0 to 100%) less time = more width
+              width: `${100 - (time / 60) * 100}%`,
             }}
-          ></div>
+          />
         </div>
       )}
-      <motion.div
-        initial={{ scaleX: 1 }}
-        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
-        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
-        style={{ originX: isPresent ? 0 : 1 }}
-        className="privacy-screen"
-      />
-    </main>
+    </div>
+  );
+};
+
+const WordsMinutePage = () => {
+  return (
+    <BoardLayout title="Words per minute">
+      <Board />
+    </BoardLayout>
   );
 };
 

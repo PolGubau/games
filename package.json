@@ -12,7 +12,7 @@
   "dependencies": {
     "@testing-library/user-event": "^14.5.1",
     "framer-motion": "^10.16.5",
-    "pol-ui": "^2.0.9",
+    "pol-ui": "^2.0.15",
     "react": "^18.2.0",
     "react-confetti-explosion": "^2.1.2",
     "react-dom": "^18.2.0",

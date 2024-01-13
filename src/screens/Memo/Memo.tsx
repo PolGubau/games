@@ -136,7 +136,7 @@ const Board = () => {
   return (
     <main className="p-8 flex flex-col gap-8  items-center justify-center  ">
       <section className="flex gap-8 flex-col sm:flex-row h-full w-full justify-center">
-        <div className="flex sm:flex-col gap-4 sm:items-center items-center sm:justify-between sticky top-0 h-full">
+        <div className="flex sm:flex-col gap-4 sm:items-center items-center sm:justify-between sticky top-0 h-auto">
           <div className="flex sm:flex-col gap-4 items-center">
             <p className="flex justify-center items-end">
               <span className="text-4xl"> {guessed.length / 2}</span>

@@ -3,9 +3,11 @@ import { TileId } from "./Memo";
 import { tilesData } from "./data";
 
 export const useMemo = () => {
+  const START_WINNING = false;
+
   const [guessed, setGuessed] = useState<TileId[]>([]); // Array of already guessed tiles
   const [selected, setSelected] = useState<TileId[]>([]); // Array of selected tiles (max 2)
-  const [win, setWin] = useState<boolean>(true); //true if all tiles are guessed
+  const [win, setWin] = useState<boolean>(START_WINNING); //true if all tiles are guessed
   const [hint, setHint] = useState<TileId[]>([]); // Array of highlighted tiles (max 2)
 
   const [time, setTime] = useState<number>(0); // in seconds

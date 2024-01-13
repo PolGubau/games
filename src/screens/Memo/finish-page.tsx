@@ -11,9 +11,11 @@ interface Props {
 }
 const FinishPage: React.FC<Props> = ({ onReset, hintsUsed, time }) => {
   return (
-    <div className="flex flex-col items-center  gap-8 p-8 mt-20">
+    <div className="flex flex-col items-center  gap-8 p-8 mt-20 text-center">
       <ConfettiExplosion />
-      <h1 className="text-7xl sm:text-7xl font-semibold">You win!</h1>
+      <h1 className="text-7xl sm:text-7xl font-semibold text-center">
+        You win!
+      </h1>
 
       {Boolean(time) && <p>You finished in {time} seconds.</p>}
       {Boolean(hintsUsed) && (

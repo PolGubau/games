@@ -1,17 +1,29 @@
 {
-  "theme_color": "#facc15",
+  "theme_color": "#ff4",
   "dir": "auto",
   "background_color": "#ededed",
   "display": "standalone",
-  "start_url": "https://polgubau.com",
-  "scope": "https://polgubau.com",
-  "id": "https://polgubau.com/UScGRN52vWrGW3SGFLVt",
+  "start_url": "https://games.polgubau.com",
+  "scope": "https://games.polgubau.com",
+  "id": "https://games.polgubau.com/UScGRN52vWrGW3SGFLVt",
   "orientation": "any",
   "lang": "en",
   "prefer_related_applications": false,
-  "categories": ["development", "pol", "pol gubau amores", "Pol Gubau Amores", "news", "blog", "frontend"],
-  "name": "Pol Gubau Amores",
-  "description": "👋🏼 Hello! I'm Pol Gubau Amores, a Frontend Developer and Designer based in Barcelona. I love to create beautiful and functional websites and apps.",
+  "categories": [
+    "minigames",
+    "games",
+    "fun",
+    "online",
+    "free",
+    "multiplayer",
+    "singleplayer",
+    "puzzle",
+    "strategy",
+    "action",
+    "adventure"
+  ],
+  "name": "Pol/Games - Short beautiful singleplayer minigames ",
+  "description": "💡 Explore Pol/Games, a collection of short and beautiful singleplayer minigames. Currently featuring word-per-minute and memo games, with more exciting additions planned for the future. Challenge yourself and have fun with our engaging singleplayer experiences.",
   "short_name": "Pol Gubau",
   "related_applications": [],
   "icons": [
@@ -56,33 +68,24 @@
       "purpose": "maskable"
     }
   ],
-  "protocol_handlers": [
-    {
-      "protocol": "web+pwa",
-      "url": "https://polgubau.com/?pwaprotocolredirect=%s"
-    },
-    {
-      "protocol": "web+polgubauamores",
-      "url": "https://polgubau.com/?pwaprotocolredirect=%s"
-    }
-  ],
+
   "shortcuts": [
     {
-      "name": "Blog",
-      "url": "https://polgubau.com/blog",
+      "name": "Memo",
+      "url": "https://games.polgubau.com/memo",
       "icons": [
         {
-          "src": "/icons/book-open.png",
+          "src": "/brand/icon-192x192.png",
           "sizes": "192x192"
         }
       ]
     },
     {
-      "name": "Projects",
-      "url": "https://polgubau.com/projects",
+      "name": "Words Per Minute",
+      "url": "https://polgubau.com/words-minute",
       "icons": [
         {
-          "src": "/icons/folder.png",
+          "src": "/brand/icon-192x192.png",
           "sizes": "192x192"
         }
       ]
@@ -93,19 +96,19 @@
       "src": "/brand/screenshot.jpg",
       "type": "image/jpeg",
       "sizes": "900x1600",
-      "label": "Pol Gubau Amores - Personal site, discover my projects and latest blog entries"
+      "label": "Pol/Games - Short beautiful singleplayer minigames"
     },
     {
       "src": "/brand/screenshot2.jpg",
       "type": "image/jpeg",
       "sizes": "900x1600",
-      "label": "Frontend development made easy - Frontend Developer and Designer based in Barcelona"
+      "label": "Pol/Games - Short beautiful singleplayer minigames"
     },
     {
       "src": "/brand/screenshot3.jpg",
       "type": "image/jpeg",
       "sizes": "900x1600",
-      "label": "Blog - Discover impressions and opinions about web dev"
+      "label": "Pol/Games - Short beautiful singleplayer minigames"
     }
   ]
 }

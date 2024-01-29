@@ -1,4 +1,4 @@
-import { useIsPresent, motion } from "framer-motion";
+import { useIsPresent, motion, AnimatePresence } from "framer-motion";
 import MainLayout from "./MainLayout";
 
 interface Props {
@@ -10,14 +10,19 @@ const BoardLayout: React.FC<Props> = ({ children, title }) => {
 
   return (
     <MainLayout title={title}>
-      {children}
-      <motion.div
-        initial={{ scaleX: 1 }}
-        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
-        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
-        style={{ originX: isPresent ? 0 : 1 }}
-        className="privacy-screen"
-      />
+      <AnimatePresence mode="wait">
+        {children}
+        <motion.div
+          initial={{ scaleX: 1 }}
+          animate={{
+            scaleX: 0,
+            transition: { duration: 0.5, ease: "circOut" },
+          }}
+          exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
+          style={{ originX: isPresent ? 0 : 1 }}
+          className="privacy-screen"
+        />
+      </AnimatePresence>
     </MainLayout>
   );
 };

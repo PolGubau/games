@@ -24,7 +24,6 @@ const SudokuLobby: React.FC<Props> = ({ onStart, setDifficulty }: Props) => {
         defaultValue={50}
         onChange={(e) => {
           const value = parseInt(e.target.value);
-          console.log(value);
           setDifficulty(value);
         }}
         id="difficulty"

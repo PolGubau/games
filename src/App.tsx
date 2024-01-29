@@ -5,6 +5,7 @@ import { PoluiProvider } from "pol-ui";
 import { AnimatePresence } from "framer-motion";
 import { useLocation, useRoutes } from "react-router-dom";
 import React from "react";
+import SudokuPage from "./screens/sudoku/sudoku-page";
 function App() {
   const element = useRoutes([
     {
@@ -18,6 +19,10 @@ function App() {
     {
       path: "/words-minute",
       element: <WordsMinutePage />,
+    },
+    {
+      path: "/sudoku",
+      element: <SudokuPage />,
     },
   ]);
   const location = useLocation();

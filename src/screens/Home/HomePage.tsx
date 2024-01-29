@@ -16,6 +16,11 @@ const HomePage = () => {
       description: "Type as many words as you can",
       link: "/words-minute",
     },
+    {
+      name: "Sudoku",
+      description: "Fill the board with numbers",
+      link: "/sudoku",
+    },
   ];
 
   return (

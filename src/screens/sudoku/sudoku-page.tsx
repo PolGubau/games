@@ -126,7 +126,6 @@ const BoardComponent = () => {
                       className="text-center transition-all h-full w-full focus:outline-none focus:bg-primary bg-secondary/50"
                       max={9}
                       min={1}
-                      placeholder={cell.value.toString()}
                       value={""}
                       pattern="[0-9]"
                       maxLength={1}

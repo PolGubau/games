@@ -16,7 +16,6 @@ const BoardComponent = () => {
     handleStartGame,
     handleCheckCell,
     setDifficulty,
-    timeAgo,
     difficulty,
     timeUsed,
     resetGame,
@@ -58,14 +57,6 @@ const BoardComponent = () => {
       <article className="gap-2 grid grid-rows-[auto,1fr] items-center">
         <div className="flex gap-4 items-center">
           <HeartNav lives={lives} />
-          <motion.p
-            // exit={{ y: 20, opacity: 0, position: "absolute" }}
-            // initial={{ y: -20, opacity: 0 }}
-            // animate={{ y: 0, opacity: 1 }}
-            key={"countdoww" + timeAgo}
-          >
-            {timeAgo}
-          </motion.p>
         </div>
         <motion.table
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl  "

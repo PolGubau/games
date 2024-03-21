@@ -29,11 +29,11 @@ More info at https://polgubau.com
 _____________________________________________________
 `);
   return (
-    <main className="bg-primary md:p-8 w-screen h-[100svh] grid grid-rows-[auto,1fr] gap-6 overflow-hidden">
+    <main className="bg-primary md:p-6 w-screen h-[100svh] grid grid-rows-[auto,1fr] gap-4 overflow-hidden">
       <nav className="bg-secondary-50 w-full p-3 md:rounded-full justify-start gap-2 md:gap-4 flex items-center z-10">
         <Link to="/" title="Go to main screen">
-          <div className="flex items-center bg-primary-900 h-full p-1 aspect-square rounded-full text-secondary-50 justify-center text-3xl md:p-4">
-            <IoGameController className="text-xl md:text-4xl" />
+          <div className="flex items-center bg-primary-900 h-full p-1 aspect-square rounded-full text-secondary-50 justify-center md:p-3">
+            <IoGameController className="text-xl md:text-2xl" />
           </div>
         </Link>
         <hgroup className="text-lg md:text-4xl flex gap-1 items-center">
@@ -53,7 +53,7 @@ _____________________________________________________
         </hgroup>
       </nav>
 
-      <div className="w-full h-auto grid gap-2 bg-secondary-50 md:rounded-[30px] xl:rounded-[80px] shadow-xl overflow-auto">
+      <div className="w-full h-auto grid gap-2 bg-secondary-50 md:rounded-[30px] xl:rounded-[80px] overflow-auto">
         {children}
       </div>
     </main>

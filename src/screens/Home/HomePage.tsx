@@ -5,36 +5,41 @@ import MemoPage from "../Memo/Memo";
 import WordsMinutePage from "../words-minute/words-minute";
 import SudokuPage from "../sudoku/sudoku-page";
 import { Wordle } from "../Wordle/Wordle";
-
+import SnakeGame from "../snake/snake-game";
+export const games = [
+  {
+    name: "Memo",
+    description: "Find all the pairs of tiles",
+    link: "/memo",
+    element: <MemoPage />,
+  },
+  {
+    name: "Words per minute",
+    description: "Type as many words as you can",
+    link: "/words-minute",
+    element: <WordsMinutePage />,
+  },
+  {
+    name: "Sudoku",
+    description: "Fill the board with numbers",
+    link: "/sudoku",
+    element: <SudokuPage />,
+  },
+  {
+    name: "Wordle",
+    description: "Guess the word with limited attemps",
+    link: "/wordle",
+    element: <Wordle />,
+  },
+  {
+    name: "Snake",
+    description: "Eat the food and grow",
+    link: "/snake",
+    element: <SnakeGame />,
+  },
+];
 const HomePage = () => {
   const isPresent = useIsPresent();
-
-  const games = [
-    {
-      name: "Memo",
-      description: "Find all the pairs of tiles",
-      link: "/memo",
-      element: <MemoPage />,
-    },
-    {
-      name: "Words per minute",
-      description: "Type as many words as you can",
-      link: "/words-minute",
-      element: <WordsMinutePage />,
-    },
-    {
-      name: "Sudoku",
-      description: "Fill the board with numbers",
-      link: "/sudoku",
-      element: <SudokuPage />,
-    },
-    {
-      name: "Wordle",
-      description: "Guess the word with limited attemps",
-      link: "/wordle",
-      element: <Wordle />,
-    },
-  ];
 
   return (
     <MainLayout>

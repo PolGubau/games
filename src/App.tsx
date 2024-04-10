@@ -1,6 +1,6 @@
 import Board from "./screens/Memo/Memo";
 import WordsMinutePage from "./screens/words-minute/words-minute";
-import HomePage from "./screens/Home/HomePage";
+import HomePage, { games } from "./screens/Home/HomePage";
 import { PoluiProvider } from "pol-ui";
 import { AnimatePresence } from "framer-motion";
 import { useLocation, useRoutes } from "react-router-dom";
@@ -13,22 +13,10 @@ function App() {
       path: "/",
       element: <HomePage />,
     },
-    {
-      path: "/memo",
-      element: <Board />,
-    },
-    {
-      path: "/words-minute",
-      element: <WordsMinutePage />,
-    },
-    {
-      path: "/sudoku",
-      element: <SudokuPage />,
-    },
-    {
-      path: "/wordle",
-      element: <Wordle />,
-    },
+    ...games.map((game) => ({
+      path: game.link,
+      element: game.element,
+    })),
   ]);
   const location = useLocation();
 

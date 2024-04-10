@@ -1,6 +1,6 @@
 # Pol/Games
 
-![Pol/Games Logo](/brand/0.webp)
+![Pol/Games Logo](https://games.polgubau.com/brand/0.webp)
 
 Pol/Games is a collection of short and beautiful singleplayer minigames. Currently featuring word-per-minute and memo games, with more exciting additions planned for the future. Challenge yourself and have fun with our engaging singleplayer experiences.
 

@@ -1,15 +1,10 @@
 function Food({ position }: { position: { x: number; y: number } }) {
   return (
     <div
+      className="food bg-primary-100 w-[15px] h-[15px] z-0 absolute m-[3px] rounded-full animate-ping"
       style={{
-        width: "15px",
-        height: "15px",
-        backgroundColor: "#3dd1e7",
-        margin: "3px",
-        position: "absolute",
         left: `${position.x}%`,
         top: `${position.y}%`,
-        zIndex: 0,
       }}
     />
   );

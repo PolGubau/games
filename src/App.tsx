@@ -1,12 +1,8 @@
-import Board from "./screens/Memo/Memo";
-import WordsMinutePage from "./screens/words-minute/words-minute";
-import HomePage, { games } from "./screens/Home/HomePage";
-import { PoluiProvider } from "pol-ui";
 import { AnimatePresence } from "framer-motion";
-import { useLocation, useRoutes } from "react-router-dom";
+import { PoluiProvider } from "pol-ui";
 import React from "react";
-import SudokuPage from "./screens/sudoku/sudoku-page";
-import { Wordle } from "./screens/Wordle/Wordle";
+import { useLocation, useRoutes } from "react-router-dom";
+import HomePage, { games } from "./screens/Home/HomePage";
 function App() {
   const element = useRoutes([
     {

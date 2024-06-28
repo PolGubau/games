@@ -4,15 +4,11 @@ function Snake({ snake }: { snake: { x: number; y: number }[] }) {
       {snake.map((box, i) => (
         <div
           key={i}
+          className="bg-primary w-[15px] h-[15px] rounded-sm z-1 absolute m-[5px]"
           style={{
-            width: "15px",
-            height: "15px",
-            backgroundColor: "#e7da3d",
-            margin: "5px",
-            position: "absolute",
+            filter: `brightness(${100 + i * 5}%)`,
             left: `${box.x}%`,
             top: `${box.y}%`,
-            zIndex: 1,
           }}
         />
       ))}

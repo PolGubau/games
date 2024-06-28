@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Food from "./components/food";
 import Snake from "./components/snake";
+import { Button } from "pol-ui";
+import BoardLayout from "../../Layouts/BoardLayout";
 
 const randomFoodPosition = () => {
   const pos = { x: 0, y: 0 };
@@ -21,7 +23,7 @@ const initialSnake = {
   speed: 100,
 };
 
-function SnakeGame() {
+function SnakeBoard() {
   const [snake, setSnake] = useState(initialSnake.snake);
   const [lastDirection, setLastDirection] = useState(initialSnake.direction);
   const [foodPosition, setFoodPosition] = useState(randomFoodPosition);
@@ -76,49 +78,61 @@ function SnakeGame() {
   };
 
   return (
-    <div
-      className="w-[500px] h-[500px] bg-primary-900 relative flex flex-col items-center justify-center text-primary-50 relative rounded-lg overflow-hidden"
-      onKeyDown={(e) => setLastDirection(e.key)}
-      ref={playgroundRef}
-      tabIndex={0}
-    >
-      {isStarted && <div className="count"> score: {snake.length - 3}</div>}
+    <main className="p-8 flex flex-col gap-8  items-center justify-center  ">
+      <section className="flex gap-8 flex-col sm:flex-row h-full w-full justify-center">
+        <div
+          className="w-[500px] h-[500px] bg-primary-900   flex flex-col items-center justify-center text-primary-50 relative rounded-lg overflow-hidden"
+          onKeyDown={(e) => setLastDirection(e.key)}
+          ref={playgroundRef}
+          tabIndex={0}
+        >
+          {isStarted && <div className="count"> score: {snake.length - 3}</div>}
 
-      {!isStarted && (
-        <>
-          <button
-            onClick={() => {
-              setIsStarted(true);
-              playgroundRef.current?.focus();
-            }}
-            type="submit"
-          >
-            Start
-          </button>
-          <div className="arrow-msg text">Press Arrows keys to play!</div>
-        </>
-      )}
-      {gameOver && (
-        <>
-          <div className="game-over text">Game Over!</div>
-          <button
-            onClick={() => {
-              setIsStarted(true);
-              setGameOver(false);
-              setSnake(initialSnake.snake);
-              setLastDirection(initialSnake.direction);
-              playgroundRef.current?.focus();
-            }}
-            type="submit"
-          >
-            Restart
-          </button>
-        </>
-      )}
-      <Snake snake={snake} />
-      {!gameOver && <Food position={foodPosition} />}
-    </div>
+          {!isStarted && (
+            <>
+              <Button
+                className="text-black"
+                onClick={() => {
+                  setIsStarted(true);
+                  playgroundRef.current?.focus();
+                }}
+                type="submit"
+                size={"xl"}
+              >
+                Start
+              </Button>
+            </>
+          )}
+          {gameOver && (
+            <>
+              <div className="game-over text">Game Over!</div>
+              <Button
+                className="text-black"
+                onClick={() => {
+                  setIsStarted(true);
+                  setGameOver(false);
+                  setSnake(initialSnake.snake);
+                  setLastDirection(initialSnake.direction);
+                  playgroundRef.current?.focus();
+                }}
+                type="submit"
+              >
+                Restart
+              </Button>
+            </>
+          )}
+          <Snake snake={snake} />
+          {!gameOver && <Food position={foodPosition} />}
+        </div>
+      </section>
+    </main>
   );
 }
-
-export default SnakeGame;
+const SnakePage = () => {
+  return (
+    <BoardLayout title="Snake">
+      <SnakeBoard />
+    </BoardLayout>
+  );
+};
+export default SnakePage;

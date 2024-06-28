@@ -4,7 +4,6 @@ import { motion, useIsPresent } from "framer-motion";
 import MemoPage from "../Memo/Memo";
 import WordsMinutePage from "../words-minute/words-minute";
 import SudokuPage from "../sudoku/sudoku-page";
-import { Wordle } from "../Wordle/Wordle";
 import SnakeGame from "../snake/snake-game";
 export const games = [
   {
@@ -25,12 +24,7 @@ export const games = [
     link: "/sudoku",
     element: <SudokuPage />,
   },
-  {
-    name: "Wordle",
-    description: "Guess the word with limited attemps",
-    link: "/wordle",
-    element: <Wordle />,
-  },
+
   {
     name: "Snake",
     description: "Eat the food and grow",

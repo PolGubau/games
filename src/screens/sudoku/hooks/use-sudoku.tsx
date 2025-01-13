@@ -162,7 +162,8 @@ export const useSudoku = () => {
     setDifficulty,
     timeAgo,
     timeUsed: String(timeUsed),
-    percentDone,resetGame,
+    percentDone,
+    resetGame,
     difficulty,
     lives: STARTING_LIVES - errors,
   };

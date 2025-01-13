@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Tooltip } from "pol-ui";
 import React from "react";
 import { TbHeartFilled } from "react-icons/tb";
 
@@ -45,7 +46,11 @@ const HeartNav: React.FC<HeartNavProps> = ({
             rotateZ: Math.random() * (maxDegree - -maxDegree) + -maxDegree,
           }}
         >
-          <TbHeartFilled size={35} />
+          <Tooltip
+            content={<p className="flex min-w-[40px] justify-center">A live</p>}
+          >
+            <TbHeartFilled size={35} />
+          </Tooltip>
         </motion.span>
       ))}
     </motion.ul>

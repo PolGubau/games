@@ -37,19 +37,10 @@ _____________________________________________________
           </div>
         </Link>
         <hgroup className="text-lg md:text-4xl flex gap-1 items-center">
-          <Link
-            to="https://polgubau.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Check my portfolio"
-          >
+          <Link to="/" title="Go to main screen">
             <h2>Pol/</h2>
           </Link>
-          <h1 className="font-bold">
-            <Link to="/" title="Go to main screen">
-              {title ?? "Games"}
-            </Link>
-          </h1>
+          <h1 className="font-bold">{title ?? "Games"}</h1>
         </hgroup>
       </nav>
 

@@ -5,6 +5,7 @@ import MemoPage from "../Memo/Memo";
 import WordsMinutePage from "../words-minute/words-minute";
 import SudokuPage from "../sudoku/sudoku-page";
 import SnakeGame from "../snake/snake-game";
+import { MathPage } from "../Math/Math";
 export const games = [
   {
     name: "Memo",
@@ -30,6 +31,13 @@ export const games = [
     description: "Eat the food and grow",
     link: "/snake",
     element: <SnakeGame />,
+  },
+
+  {
+    name: "Math",
+    description: "Solve easy operations",
+    link: "/math",
+    element: <MathPage />,
   },
 ];
 const HomePage = () => {

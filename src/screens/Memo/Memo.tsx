@@ -60,43 +60,50 @@ const Board = () => {
       },
     },
   };
-
+  const cardsLen = tilesData.length; // 20
+  const rowLen = 5; // 5
   const item = {
     visible: { opacity: 1, y: 0 },
     hidden: { opacity: 0, y: 20 },
   };
 
-  const specs = (tile: Tile) => {
+  const specs = (tile: Tile, idx: number) => {
     const tileId = tile.id;
 
     const baseSpecs = {
       baseClassname:
-        "flex  rounded-2xl items-center justify-center  md:p-8 text-primary-900 transition-all flex-1  max-w-[150px]",
+        "flex  items-center justify-center p-4 md:p-6 lg:p-8 text-primary-900 transition-all flex-1 max-w-[150px]",
+      firstCard: "rounded-ss-2xl",
+      lastOfFirstRow: "rounded-se-2xl",
+      firstOfLastRow: "rounded-es-2xl",
+      lastCard: "rounded-ee-2xl",
     };
+
+    const alwaysClasses = twMerge(
+      idx === 0 && baseSpecs.firstCard,
+      idx === rowLen - 1 && baseSpecs.lastOfFirstRow,
+      idx === cardsLen - rowLen && baseSpecs.firstOfLastRow,
+      idx === cardsLen - 1 && baseSpecs.lastCard,
+      baseSpecs.baseClassname
+    );
 
     if (isVisible(tileId))
       return {
         ...baseSpecs,
         disabled: true,
-        className: twMerge(baseSpecs.baseClassname, ""),
+        className: twMerge(baseSpecs.baseClassname, alwaysClasses),
       };
 
     return {
       ...baseSpecs,
       rotateY: 180,
-
-      whileHover: {
-        scale: 0.95,
-        transition: { duration: 0.1 },
-      },
-      whileTap: {
-        scale: 0.9,
-
-        transition: { duration: 0.1 },
-      },
+      key: tile.id,
+      whileHover: { scale: 0.95, transition: { duration: 0.1 } },
+      whileTap: { scale: 0.9, transition: { duration: 0.1 } },
       className: twMerge(
-        baseSpecs.baseClassname,
-        "focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 bg-secondary focus:bg-secondary-700 text-secondary-800"
+        "focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 bg-secondary focus:bg-secondary-700 text-secondary-800",
+        alwaysClasses,
+        baseSpecs.baseClassname
       ),
 
       onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -125,10 +132,10 @@ const Board = () => {
     );
 
   return (
-    <main className="p-8 flex flex-col gap-8  items-center justify-center  ">
+    <main className="p-8 flex flex-col gap-8 items-center justify-center">
       <section className="flex gap-8 flex-col sm:flex-row h-full w-full justify-center">
         <div className="flex sm:flex-col gap-4 sm:items-center items-center sm:justify-between sticky top-0 h-auto">
-          <div className="flex sm:flex-col gap-4 items-center">
+          <nav className="flex sm:flex-col gap-4 items-center">
             <p className="flex justify-center items-end">
               <span className="text-4xl"> {guessed.length / 2}</span>
               <span>/ {tilesData.length / 2}</span>
@@ -144,7 +151,7 @@ const Board = () => {
                   whileTap={{
                     scale: 0.9,
                   }}
-                  className=" bg-primary-900 text-primary-50 rounded-full text-4xl p-4 focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 focus:outline-none flex justify-center items-center"
+                  className=" bg-primary-900 text-primary-50 rounded-full md:text-4xl p-4 focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 focus:outline-none flex justify-center items-center"
                 >
                   <PiArrowLeftBold />
                 </motion.button>
@@ -166,7 +173,7 @@ const Board = () => {
                   rotate: -20,
                 }}
                 onClick={handleReset}
-                className="aspect-square  bg-primary-900 text-primary-50 rounded-full text-4xl p-4 focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 focus:outline-none flex justify-center items-center"
+                className="aspect-square  bg-primary-900 text-primary-50 rounded-full md:text-4xl p-4 focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 focus:outline-none flex justify-center items-center"
               >
                 <PiArrowCounterClockwiseBold />
               </motion.button>{" "}
@@ -186,12 +193,12 @@ const Board = () => {
                   rotate: -20,
                 }}
                 onClick={getHint}
-                className="aspect-square bg-primary-900 text-primary-50 rounded-full text-4xl p-4 focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 focus:outline-none flex justify-center items-center"
+                className="aspect-square bg-primary-900 text-primary-50 rounded-full md:text-4xl p-4 focus-visible:ring-4 focus-visible:ring-offset-4 focus-visible:ring-primary-700 focus-visible:ring-offset-secondary-50 focus:outline-none flex justify-center items-center"
               >
                 <PiLightbulbBold />
               </motion.button>
             </Tooltip>
-          </div>
+          </nav>
           {hintsUsed > 0 && (
             <p className="md:flex hidden text-xl">
               <span>
@@ -204,9 +211,9 @@ const Board = () => {
           initial="hidden"
           animate="visible"
           variants={list}
-          className="grid grid-cols-4 xl:grid-cols-5 md:w-fit gap-3 xl:gap-8 rounded-2xl p-1  h-full  "
+          className="grid grid-cols-5 w-fit gap-0.5 xl:gap-2 p-1 h-full "
         >
-          {tilesData.map((tile) => {
+          {tilesData.map((tile, idx) => {
             return (
               <motion.button
                 onKeyDown={(e) => {
@@ -214,9 +221,8 @@ const Board = () => {
                     setSelected([...selected, tile.id]);
                   }
                 }}
-                key={tile.id}
                 variants={item}
-                {...specs(tile)}
+                {...specs(tile, idx)}
                 style={{
                   backgroundColor: isVisible(tile.id)
                     ? tile.color
@@ -225,7 +231,7 @@ const Board = () => {
                     : undefined,
                 }}
               >
-                <div className="opacity-70 text-5xl sm:text-7xl md:text-6xl lg:text-6xl xl:text-7xl ">
+                <div className="opacity-70 text-4xl md:text-5xl lg:text-6xl xl:text-7xl ">
                   {isVisible(tile.id) ? tile.icon : <TbQuestionMark />}
                 </div>
               </motion.button>

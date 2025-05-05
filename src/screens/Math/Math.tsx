@@ -1,86 +1,92 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BoardLayout from "../../Layouts/BoardLayout";
-import { getRandom } from "../../utilities";
-import { staticOperations } from "./data";
+import { generateOperations } from "./data";
 import Game from "./screens/Game";
 import MathIdlePage from "./screens/Idle";
-import { Operation, SolvedOperation } from "./types";
+import type { Operation, SolvedOperation } from "./types";
+
+const def = {
+	initialTime: 60,
+};
 
 export const MathPage = () => {
-  return (
-    <BoardLayout title="Math">
-      <Board />
-    </BoardLayout>
-  );
+	return (
+		<BoardLayout title="Math">
+			<Board />
+		</BoardLayout>
+	);
 };
 
 export const useMath = () => {
-  const [idx, setIdx] = useState<number>(-1);
-  const [time, setTime] = useState<number>(0);
+	const [idx, setIdx] = useState<number>(-1);
+	const [time, setTime] = useState<number>(0);
 
-  const operations = staticOperations;
+	const [operations, setOperations] = useState<Operation[]>([]);
 
-  const [answered, setAnswered] = useState<SolvedOperation[]>([]);
+	const [answered, setAnswered] = useState<SolvedOperation[]>([]);
 
-  const questionList = useCallback(() => {
-    const shuffledOperations = operations;
+	const currentOperation = operations[idx];
 
-    return shuffledOperations;
-  }, []);
+	const handleAnswer = (answer: string) => {
+		//
+		if (Number.isNaN(Number(answer))) {
+			alert("Please enter a valid number");
+			return;
+		}
+		if (!currentOperation) {
+			console.error("No operation to solve");
+			return;
+		}
+		const newAnswer: SolvedOperation = {
+			...currentOperation,
+			at: new Date(),
+			answered: answer,
+		};
+		setAnswered((prev) => [...prev, newAnswer]);
 
-  const currentOperation = questionList()[idx];
+		//
+		setIdx((prev) => prev + 1);
+	};
 
-  const handleAnswer = (answer: string) => {
-    //
-    if (!currentOperation) {
-      console.error("No operation to solve");
-      return;
-    }
-    const newAnswer: SolvedOperation = {
-      ...currentOperation,
-      at: new Date(),
-      answered: answer,
-    };
-    setAnswered((prev) => [...prev, newAnswer]);
+	const start = () => {
+		setIdx(0);
+		setOperations(generateOperations(100));
+		setAnswered([]);
+		setTime(def.initialTime);
+	};
+	useEffect(() => {
+		if (operations.length - 1 === idx) {
+			setIdx(-1);
 
-    //
-    setIdx((prev) => prev + 1);
-  };
+			setTime(0);
+		}
+	}, [idx, operations]);
 
-  const start = () => {
-    setIdx(0);
-    setAnswered([]);
-    setTime(60);
-  };
-  useEffect(() => {
-    if (questionList().length - 1 === idx) {
-      setTime(0);
-    }
-  }, [idx]);
-  useEffect(() => {
-    if (time > 0) {
-      const timeout = setTimeout(() => setTime(time - 1), 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, [time]);
+	useEffect(() => {
+		if (time > 0) {
+			const timeout = setTimeout(() => setTime(time - 1), 1000);
+			return () => clearTimeout(timeout);
+		}
+	}, [time]);
 
-  return { currentOperation, answered, start, handleAnswer, time };
+	return { currentOperation, answered, start, handleAnswer, time };
 };
 
 export const Board = () => {
-  const { currentOperation, time, start, handleAnswer, answered } = useMath();
+	const { currentOperation, time, start, handleAnswer, answered } = useMath();
 
-  return (
-    <section className="p-4 flex justify-center h-full flex-col gap-8 items-center">
-      {!time ? (
-        <MathIdlePage onStart={start} done={answered} />
-      ) : (
-        <Game
-          operation={currentOperation as Operation}
-          onSubmit={(o) => handleAnswer(o)}
-          time={time}
-        />
-      )}
-    </section>
-  );
+	return (
+		<section className="p-4 flex justify-center h-full flex-col gap-8 items-center">
+			{!time ? (
+				<MathIdlePage onStart={start} done={answered} />
+			) : (
+				<Game
+					reset={start}
+					operation={currentOperation as Operation}
+					onSubmit={(o) => handleAnswer(o)}
+					time={time}
+				/>
+			)}
+		</section>
+	);
 };

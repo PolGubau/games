@@ -1,79 +1,46 @@
-import { Operation } from "./types";
+import type { Operation } from "./types";
 
-export const staticOperations: Operation[] = [
-  {
-    operation: "2+2",
-    correct: "4",
-    solutions: ["4", "2", "1", "12"],
-  },
-  {
-    operation: "3+1",
-    correct: "4",
-    solutions: ["4", "2", "5", "1"],
-  },
-  {
-    operation: "2+1",
-    correct: "3",
-    solutions: ["3", "2", "5", "1"],
-  },
-  {
-    operation: "2+4",
-    correct: "6",
-    solutions: ["3", "2", "5", "1"],
-  },
-  {
-    operation: "2+3",
-    correct: "5",
-    solutions: ["3", "2", "5", "1"],
-  },
-  {
-    operation: "2-1",
-    correct: "1",
-    solutions: ["3", "2", "5", "1"],
-  },
-  {
-    operation: "2*4",
-    correct: "8",
-    solutions: ["8", "2", "5", "1"],
-  },
-  {
-    operation: "4*0.5",
-    correct: "2",
-    solutions: ["3", "2", "5", "1"],
-  },
-  {
-    operation: "1*0.5",
-    correct: "0.5",
-    solutions: ["0.5", "2", "5", "1"],
-  },
-  {
-    operation: "2*0.5",
-    correct: "1",
-    solutions: ["0.5", "2", "5", "1"],
-  },
-  {
-    operation: "3*0.5",
-    correct: "1.5",
-    solutions: ["0.5", "2", "1.5", "1"],
-  },
-  {
-    operation: "3*5",
-    correct: "15",
-    solutions: ["50", "3", "15", "10"],
-  },
-  {
-    operation: "3/3",
-    correct: "1",
-    solutions: ["3", "1", "5", "0"],
-  },
-  {
-    operation: "1/3",
-    correct: "0.33",
-    solutions: ["0.33", "1", "2.3", "1.5"],
-  },
-  {
-    operation: "1/3",
-    correct: "0.33",
-    solutions: ["0.33", "1", "2.3", "1.5"],
-  },
-];
+/**
+ * Genera un array de operaciones matemáticas únicas.
+ * @param count Número de operaciones a generar
+ * @returns Array de operaciones
+ */
+export function generateOperations(count: number): Operation[] {
+	const ops = ["+", "-", "*", "/"];
+	const generated = new Set<string>();
+	const result: Operation[] = [];
+
+	while (result.length < count) {
+		const a = Math.floor(Math.random() * 5) + 2;
+		const b = Math.floor(Math.random() * 6) + 1;
+		const op = ops[Math.floor(Math.random() * ops.length)];
+
+		if (op === "/" && (b === 0 || a % b !== 0)) continue;
+
+		const expr = `${a}${op}${b}`;
+		if (generated.has(expr)) continue;
+
+		// biome-ignore lint/security/noGlobalEval: <explanation>
+		const correct = eval(expr).toString();
+		const falseAnswers = new Set<string>();
+
+		while (falseAnswers.size < 3) {
+			const delta = Math.floor(Math.random() * 21) - 10;
+			const wrong = (Number.parseInt(correct) + delta).toString();
+			if (wrong !== correct) falseAnswers.add(wrong);
+		}
+
+		const all = Array.from(falseAnswers)
+			.concat(correct)
+			.sort(() => Math.random() - 0.5);
+
+		generated.add(expr);
+		result.push({
+			operation: expr,
+			correct,
+			solutions: all,
+		});
+	}
+
+	return result;
+}

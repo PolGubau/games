@@ -1,15 +1,15 @@
-import React from "react";
+import type React from "react";
 import { IoGameController } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const MainLayout = ({
-  children,
-  title,
+	children,
+	title,
 }: {
-  children: React.ReactNode;
-  title?: string;
+	children: React.ReactNode;
+	title?: string;
 }) => {
-  const sign = `
+	const sign = `
 
    ____          _          _ ____        ____       _ 
   / ___|___   __| | ___  __| | __ ) _   _|  _ \\ ___ | |
@@ -19,8 +19,8 @@ const MainLayout = ({
                                     |___/              
 
 `;
-  console.log(sign);
-  console.log(`
+	console.log(sign);
+	console.log(`
 Hi there! 👋
 This website has been made by @polgubau, and it's open source!
 
@@ -28,27 +28,27 @@ More info at https://polgubau.com
 
 _____________________________________________________
 `);
-  return (
-    <main className="bg-primary md:p-6 w-screen h-[100svh] grid grid-rows-[auto,1fr] gap-4 overflow-hidden">
-      <nav className="bg-secondary-50 w-full p-3 md:rounded-full justify-start gap-2 md:gap-4 flex items-center z-10">
-        <Link to="/" title="Go to main screen">
-          <div className="flex items-center bg-primary-900 h-full p-1 aspect-square rounded-full text-secondary-50 justify-center md:p-3">
-            <IoGameController className="text-xl md:text-2xl" />
-          </div>
-        </Link>
-        <hgroup className="text-lg md:text-4xl flex gap-1 items-center">
-          <Link to="/" title="Go to main screen">
-            <h2>Pol/</h2>
-          </Link>
-          <h1 className="font-bold">{title ?? "Games"}</h1>
-        </hgroup>
-      </nav>
+	return (
+		<main className="bg-primary md:p-6 w-screen h-[100svh] grid grid-rows-[auto,1fr] gap-4 overflow-hidden">
+			<nav className="bg-secondary-50 w-full p-3 md:rounded-full justify-start gap-2 md:gap-4 flex items-center z-10">
+				<Link to="/" title="Go to main screen">
+					<div className="flex items-center bg-primary-900 h-full p-1 aspect-square rounded-full text-secondary-50 justify-center md:p-3">
+						<IoGameController className="text-xl md:text-2xl" />
+					</div>
+				</Link>
+				<hgroup className="text-lg md:text-4xl flex gap-1 items-center">
+					<Link to="/" title="Go to main screen">
+						<h2>Pol/</h2>
+					</Link>
+					<h1 className="font-bold">{title ?? "Games"}</h1>
+				</hgroup>
+			</nav>
 
-      <div className="w-full h-auto grid gap-2 bg-secondary-50 md:rounded-[30px] xl:rounded-[80px] overflow-auto">
-        {children}
-      </div>
-    </main>
-  );
+			<div className="w-full h-auto grid gap-2 bg-secondary-50 md:rounded-[30px] xl:rounded-[80px] overflow-auto">
+				{children}
+			</div>
+		</main>
+	);
 };
 
 export default MainLayout;

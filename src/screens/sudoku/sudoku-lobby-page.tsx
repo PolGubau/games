@@ -41,7 +41,7 @@ const BoardComponent = () => {
 			<SudokuLobby onStart={generateBoardCells} />
 
 			{unfinishedSudoku.length > 0 && (
-				<div className="flex flex-col gap-4 items-center justify-center p-4 border-t border-secondary/50 mx-6 mt-10 ">
+				<div className="flex flex-col gap-4 items-center justify-center p-4 border-t border-secondary/50 mx-6 mt-10 overflow-x-auto ">
 					<h3 className="text-xl md:text-2xl text-center ">
 						Continue your last games
 					</h3>
@@ -93,7 +93,7 @@ const BoardComponent = () => {
 				</div>
 			)}
 			{ranking.length > 0 && (
-				<div className="flex flex-col gap-4 items-center justify-center p-4 border-t border-secondary/50 mx-6 mt-10 ">
+				<div className="flex flex-col gap-4 items-center justify-center p-4 border-t border-secondary/50 mx-6 mt-10 overflow-x-auto">
 					<h3 className="text-2xl md:text-3xl max-w-[800px] text-center font-bold ">
 						Ranking
 					</h3>

@@ -16,7 +16,7 @@ function returnBlock(cell: number) {
 // given a number, a row and a sudoku, returns true if the number can be placed in the row
 function isPossibleRow(number: number, row: number, sudoku: number[]) {
 	for (let i = 0; i <= 8; i++) {
-		if (sudoku[row * 9 + i] == number) {
+		if (sudoku[row * 9 + i] === number) {
 			return false;
 		}
 	}
@@ -26,7 +26,7 @@ function isPossibleRow(number: number, row: number, sudoku: number[]) {
 // given a number, a column and a sudoku, returns true if the number can be placed in the column
 function isPossibleCol(number: number, col: number, sudoku: number[]) {
 	for (let i = 0; i <= 8; i++) {
-		if (sudoku[col + 9 * i] == number) {
+		if (sudoku[col + 9 * i] === number) {
 			return false;
 		}
 	}
@@ -42,7 +42,7 @@ function isPossibleBlock(number: number, block: number, sudoku: number[]) {
 					(i % 3) +
 					9 * Math.floor(i / 3) +
 					3 * (block % 3)
-			] == number
+			] === number
 		) {
 			return false;
 		}
@@ -70,7 +70,7 @@ function isCorrectRow(row: number, sudoku: number[]) {
 		rowTemp[i] = sudoku[row * 9 + i];
 	}
 	rowTemp.sort();
-	return rowTemp.join() == rightSequence.join();
+	return rowTemp.join() === rightSequence.join();
 }
 
 // given a column and a sudoku, returns true if it's a legal column
@@ -81,7 +81,7 @@ function isCorrectCol(col: number, sudoku: number[]) {
 		colTemp[i] = sudoku[col + i * 9];
 	}
 	colTemp.sort();
-	return colTemp.join() == rightSequence.join();
+	return colTemp.join() === rightSequence.join();
 }
 
 // given a 3x3 block and a sudoku, returns true if it's a legal block
@@ -98,7 +98,7 @@ function isCorrectBlock(block: number, sudoku: number[]) {
 			];
 	}
 	blockTemp.sort();
-	return blockTemp.join() == rightSequence.join();
+	return blockTemp.join() === rightSequence.join();
 }
 
 // given a sudoku, returns true if the sudoku is solved
@@ -127,6 +127,7 @@ function determinePossibleValues(cell: number, sudoku: number[]) {
 }
 
 // given an array of possible values assignable to a cell, returns a random value picked from the array
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function determineRandomPossibleValue(possible: any[], cell: number) {
 	const randomPicked = Math.floor(Math.random() * possible[cell].length);
 	return possible[cell][randomPicked];
@@ -159,6 +160,7 @@ function removeAttempt(attemptArray: number[], number: number) {
 }
 
 // given a two dimension array of possible values, returns the index of a cell where there are the less possible numbers to choose from
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function nextRandom(possible: any[]) {
 	let max = 9;
 	let minChoices = 0;
@@ -179,13 +181,17 @@ function nextRandom(possible: any[]) {
 	return minChoices;
 }
 
-export function generateBoard(sudoku: number[]): number[] {
+export function generateBoard(s: number[]): number[] {
+	let sudoku = s;
 	const saved = new Array();
 	const savedSudoku = new Array();
 	let i = 0;
-	let nextMove;
-	let whatToTry;
-	let attempt;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	let nextMove: any;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	let whatToTry: any;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	let attempt: any;
 	while (!isSolvedSudoku(sudoku)) {
 		i++;
 		nextMove = scanSudokuForUnique(sudoku);

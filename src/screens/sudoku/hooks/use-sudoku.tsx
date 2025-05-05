@@ -32,6 +32,7 @@ export const useSudoku = () => {
 		sudoku?.board?.flat().filter((cell) => cell.isLocked).length || 0;
 	const emptyCells = TOTAL_CELLS - lockedAmount;
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (!sudoku || sudoku.win || sudoku.lost) return;
 

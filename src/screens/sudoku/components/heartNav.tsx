@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Tooltip } from "pol-ui";
 import type React from "react";
 import { TbHeartFilled } from "react-icons/tb";
 

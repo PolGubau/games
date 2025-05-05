@@ -42,7 +42,7 @@ const FinishPage: React.FC<Props> = ({ onReset, hintsUsed, time }) => {
 						</motion.button>
 					</Link>
 				</Tooltip>
-				<Tooltip content="Reset the game">
+				<Tooltip label="Reset the game">
 					<motion.button
 						layoutId="resetButton"
 						whileHover={{

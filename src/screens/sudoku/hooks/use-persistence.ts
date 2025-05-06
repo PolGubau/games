@@ -40,7 +40,6 @@ export const useSudokuPersistence = () => {
 		}
 
 		thisSudoku.board = board;
-		thisSudoku.result = board;
 
 		await db.sudoku.update(thisSudoku.id, thisSudoku);
 	};
@@ -57,28 +56,26 @@ export const useSudokuPersistence = () => {
 		return ranking;
 	}, []);
 	const getUnfinishedSudoku = useCallback(async (): Promise<Sudoku[]> => {
+		// both win and lost are 0
 		const unfinishedSudoku = await db.sudoku
 			.where("win")
 			.equals(0)
-			.or("lost")
-			.equals(0)
+			.and((sudoku) => sudoku.lost === 0)
 			.toArray();
 
-		console.log(unfinishedSudoku);
 		return unfinishedSudoku;
 	}, []);
 
 	const ranking = getRanking();
 	const createSudoku = async (
-		board: Board = [],
-		difficulty?: number,
+		board: Board,
+		difficulty: number,
 	): Promise<Sudoku> => {
 		const newSudoku: Sudoku = {
 			id: crypto.randomUUID(),
-			difficulty: difficulty || 50,
+			difficulty: difficulty,
 			completionTime: null,
 			board,
-			result: board,
 			timeStarted: new Date(),
 			timeFinished: null,
 			lives: 3,
@@ -91,6 +88,36 @@ export const useSudokuPersistence = () => {
 		return newSudoku;
 	};
 
+	const getStats = async () => {
+		// return stats about your games (win streak, win %, average time, etc)
+
+		const allGames = await db.sudoku.toArray();
+		const allWins = await db.sudoku.where("win").equals(1).toArray();
+		const allLost = await db.sudoku.where("lost").equals(1).toArray();
+		const allFinished = await db.sudoku
+			.where("win")
+			.equals(1)
+			.or("lost")
+			.equals(1)
+			.toArray();
+		const allUnfinished = await db.sudoku
+			.where("win")
+			.equals(0)
+			.and((sudoku) => sudoku.lost === 0)
+			.toArray();
+
+		const winPercentage = (allWins.length / allFinished.length) * 100;
+
+		return {
+			allGames,
+			allWins,
+			allLost,
+			allFinished,
+			allUnfinished,
+			winPercentage,
+		};
+	};
+
 	return {
 		putSudoku,
 		saveBoard,
@@ -101,5 +128,6 @@ export const useSudokuPersistence = () => {
 		getSudoku,
 		looseLife,
 		getUnfinishedSudoku,
+		getStats,
 	};
 };

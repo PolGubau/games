@@ -21,7 +21,7 @@ const container = {
 	},
 };
 const SudokuBoard = () => {
-	const { handleCheckCell, sudoku } = useSudoku();
+	const { handleCheckCell, sudoku, percentDone } = useSudoku();
 
 	if (!sudoku) return null;
 
@@ -46,7 +46,10 @@ const SudokuBoard = () => {
 							<TbArrowLeft className="text-2xl" />
 						</IconButton>
 					</Link>
-					<HeartNav lives={lives} />
+					<div className="flex gap-2 items-center">
+						<span>{percentDone} %</span>
+						<HeartNav lives={lives} />
+					</div>
 				</div>
 				<motion.table
 					className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl  "

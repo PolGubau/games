@@ -13,8 +13,8 @@ const SudokuLobby: React.FC<Props> = ({ onStart }: Props) => {
 	return (
 		<div className="p-4 pt-8 flex flex-col gap-8 items-center h-auto justify-between md:justify-center ">
 			<div className="flex flex-col gap-2 justify-center w-full max-w-[500px] text-center">
-				<h3 className="text-3xl md:text-5xl max-w-[600px]">
-					Are you ready to beat the sudoku?🧐
+				<h3 className="text-3xl text-pretty md:text-5xl max-w-[600px]">
+					Welcome to Sudoku! 🥳
 				</h3>
 				<div className="flex flex-col justify-center w-full pt-8">
 					<label htmlFor="difficulty" className="text-lg md:text-xl">

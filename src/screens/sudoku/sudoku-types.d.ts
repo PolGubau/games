@@ -10,7 +10,6 @@ export type Sudoku = {
 	difficulty: number;
 	completionTime: Date | null;
 	board: Board;
-	result: Board;
 	timeStarted: Date;
 	timeFinished: Date | null;
 	lives: number;

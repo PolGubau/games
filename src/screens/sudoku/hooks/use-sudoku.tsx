@@ -1,5 +1,5 @@
 import { useLiveQuery } from "dexie-react-hooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../db/db";
 import { generateBoard } from "../functions";
@@ -25,8 +25,6 @@ export const useSudoku = () => {
 		() => db.sudoku.where("id").equals(id).first(),
 		[id],
 	);
-
-	const [result, setResult] = useState<Cell["value"][]>(emptyCeros);
 
 	const lockedAmount =
 		sudoku?.board?.flat().filter((cell) => cell.isLocked).length || 0;
@@ -107,7 +105,9 @@ export const useSudoku = () => {
 	}) => {
 		const { board } = sudoku;
 		// check from the result array if the value is correct
-		const correctValue = result[cellRow * ROWS + cellColumn];
+		const thisRow = board[cellRow].slice(0, COLS);
+
+		const correctValue = thisRow[cellColumn].value;
 
 		if (value !== correctValue) {
 			looseLife(sudoku.id);
@@ -117,10 +117,6 @@ export const useSudoku = () => {
 			newBoard[cellRow][cellColumn].isLocked = true;
 			saveBoard(sudoku.id, newBoard);
 		}
-	};
-
-	const resetGame = () => {
-		setResult(emptyCeros);
 	};
 
 	const percentDone = Math.floor((emptyCells / TOTAL_CELLS) * 100);
@@ -136,7 +132,6 @@ export const useSudoku = () => {
 		handleCheckCell,
 		timeUsed: String(timeUsed),
 		percentDone,
-		resetGame,
 		lives: sudoku?.lives,
 	};
 };

@@ -8,7 +8,10 @@ type Board = Row[];
 export type Sudoku = {
 	id: string;
 	difficulty: number;
-	completionTime: Date | null;
+	completionTime: {
+		diff: Date;
+		string: string;
+	};
 	board: Board;
 	timeStarted: Date;
 	timeFinished: Date | null;

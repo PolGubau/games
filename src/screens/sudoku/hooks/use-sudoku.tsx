@@ -37,7 +37,7 @@ export const useSudoku = () => {
 		const handleDone = async (didWin: boolean) => {
 			const finishedTime = new Date();
 			const startedTime = sudoku.timeStarted || new Date();
-			const doneInTime = calculateTimeDiff(startedTime, finishedTime).diff;
+			const doneInTime = calculateTimeDiff(startedTime, finishedTime);
 
 			const newFields: Partial<Sudoku> = {
 				win: didWin ? 1 : 0,

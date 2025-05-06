@@ -74,7 +74,10 @@ export const useSudokuPersistence = () => {
 		const newSudoku: Sudoku = {
 			id: crypto.randomUUID(),
 			difficulty: difficulty,
-			completionTime: null,
+			completionTime: {
+				diff: new Date(),
+				string: "0:00",
+			},
 			board,
 			timeStarted: new Date(),
 			timeFinished: null,

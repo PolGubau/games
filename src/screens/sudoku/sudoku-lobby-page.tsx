@@ -107,10 +107,7 @@ const BoardComponent = () => {
 							</span>
 						</div>
 						{ranking.map((item, index) => {
-							const timeUsed = new Date(
-								// biome-ignore lint/style/noNonNullAssertion: <explanation>
-								item.completionTime!,
-							).toLocaleString();
+							const totalTimeSpent = item.completionTime.string;
 
 							const lives = item.lives === 1 ? "1 Life" : `${item.lives} Lives`;
 							const difficulty = `${item.difficulty}%`;
@@ -120,7 +117,7 @@ const BoardComponent = () => {
 									key={index}
 									className="text-xl grid grid-cols-3 gap-4 items-center"
 								>
-									<span>{timeUsed}</span>
+									<span>{totalTimeSpent}</span>
 									<span>{lives}</span>
 									<span>{difficulty}</span>
 								</li>

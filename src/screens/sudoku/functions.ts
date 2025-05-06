@@ -129,8 +129,11 @@ function determinePossibleValues(cell: number, sudoku: number[]) {
 // given an array of possible values assignable to a cell, returns a random value picked from the array
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function determineRandomPossibleValue(possible: any[], cell: number) {
-	const randomPicked = Math.floor(Math.random() * possible[cell].length);
-	return possible[cell][randomPicked];
+	const options = possible[cell];
+	if (!options || options.length === 0)
+		throw new Error(`No possible values at cell ${cell}`);
+	const randomPicked = Math.floor(Math.random() * options.length);
+	return options[randomPicked];
 }
 
 // given a sudoku, returns a two dimension array with all possible values

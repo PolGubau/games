@@ -1,8 +1,8 @@
-import ConfettiExplosion from "react-confetti-explosion";
+import { ArrowLeft, RotateCcw } from "lucide-react";
 import { motion } from "motion/react";
-import { RotateCcw, ArrowLeft } from "lucide-react";
+import ConfettiExplosion from "react-confetti-explosion";
 import { Link } from "react-router";
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip";
+import { Tooltip } from "~/components/ui/tooltip";
 
 interface Props {
 	onReset: () => void;

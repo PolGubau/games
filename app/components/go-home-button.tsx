@@ -5,7 +5,7 @@ import { Tooltip } from './ui/tooltip'
 
 export const GoHomeButton = () => {
   return (
-    <Tooltip label="Return home (the game won't be saved)">
+    <Tooltip label="Return home">
       <Link to="/" className={buttonVariants({ variant: "link" })}>
         <ArrowLeft />
         Go home

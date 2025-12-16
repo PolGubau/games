@@ -68,7 +68,7 @@ export function PlayingScreen({
       >
         <form onSubmit={onSubmit} className="relative flex items-center flex-col">
           {/* Target word (background) */}
-          <motion.div className=" inset-0 flex items-center justify-center pointer-events-none">
+          <motion.div className="inset-0 flex items-center justify-center pointer-events-none">
             <label htmlFor="input">
               <div className="text-5xl md:text-7xl font-mono opacity-30">
                 {currentWord.split("").map((char, index) => (

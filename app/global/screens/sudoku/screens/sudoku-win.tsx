@@ -1,13 +1,8 @@
-import { Slider } from "@radix-ui/react-slider";
-import { ArrowLeft } from "lucide-react";
-import { motion } from "motion/react";
 import ConfettiExplosion from "react-confetti-explosion";
 import { Link } from "react-router";
 import { GoHomeButton } from "~/components/go-home-button";
-import { Button, buttonVariants } from "~/components/ui/button";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from "~/components/ui/card";
-import { ItemContent, ItemTitle, ItemDescription, Item } from "~/components/ui/item";
-import { Tooltip } from "~/components/ui/tooltip";
+import { buttonVariants } from "~/components/ui/button";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card";
 interface Props {
   timeUsed: string | undefined;
   difficulty: number;

@@ -1,92 +1,87 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BoardLayout from "../../Layouts/BoardLayout";
-import { generateOperations } from "./data";
-import Game from "./screens/Game";
-import MathIdlePage from "./screens/Idle";
-import type { Operation, SolvedOperation } from "./types";
-
-const def = {
-  initialTime: 60,
-};
+import { useMathGame } from "./hooks/use-math-game";
+import { IdleScreen } from "./ui/idle-screen";
+import { PlayingScreen } from "./ui/playing-screen";
+import { FinishedScreen } from "./ui/finished-screen";
+import { MATH_CONFIG } from "./domain/types";
+import type { DifficultyLevel } from "./domain/types";
 
 export const MathPage = () => {
+  const [timeLimit, setTimeLimit] = useState<number>(MATH_CONFIG.DEFAULT_TIME);
+  const [difficulty, setDifficulty] = useState<DifficultyLevel>("MEDIUM");
+  const [lastResults, setLastResults] = useState<{
+    score: number;
+    correct: number;
+    total: number;
+  } | undefined>(undefined);
+
+  const {
+    isPlaying,
+    isFinished,
+    timeRemaining,
+    currentOperation,
+    currentIndex,
+    totalOperations,
+    stats,
+    solvedOperations,
+    startGame,
+    resetGame,
+    handleAnswer,
+    changeDifficulty,
+    changeTimeLimit,
+  } = useMathGame({
+    timeLimit,
+    difficulty,
+    operationsCount: MATH_CONFIG.DEFAULT_OPERATIONS,
+    onGameEnd: (results) => {
+      setLastResults({
+        score: results.score,
+        correct: results.correctAnswers,
+        total: results.totalOperations,
+      });
+    },
+  });
+
+  const handleDifficultyChange = (newDifficulty: DifficultyLevel) => {
+    setDifficulty(newDifficulty);
+    changeDifficulty(newDifficulty);
+  };
+
+  const handleTimeChange = (seconds: number) => {
+    setTimeLimit(seconds);
+    changeTimeLimit(seconds);
+  };
+
   return (
-    <BoardLayout title="Math">
-      <Board />
+    <BoardLayout title="Math Challenge">
+      <div className="p-4 pt-8 flex flex-col gap-8 items-center md:pt-20 min-h-[60vh]">
+        {!isPlaying && !isFinished && (
+          <IdleScreen
+            onStart={startGame}
+            difficulty={difficulty}
+            onDifficultyChange={handleDifficultyChange}
+            timeLimit={timeLimit}
+            onTimeChange={handleTimeChange}
+            lastResults={lastResults}
+            solvedOperations={solvedOperations}
+          />
+        )}
+
+        {isPlaying && !isFinished && currentOperation && (
+          <PlayingScreen
+            operation={currentOperation}
+            timeRemaining={timeRemaining}
+            currentIndex={currentIndex}
+            totalOperations={totalOperations}
+            onAnswer={handleAnswer}
+            onReset={resetGame}
+          />
+        )}
+
+        {isFinished && <FinishedScreen stats={stats} onRestart={resetGame} />}
+      </div>
     </BoardLayout>
   );
 };
 
-export const useMath = () => {
-  const [idx, setIdx] = useState<number>(-1);
-  const [time, setTime] = useState<number>(0);
-
-  const [operations, setOperations] = useState<Operation[]>([]);
-
-  const [answered, setAnswered] = useState<SolvedOperation[]>([]);
-
-  const currentOperation = operations[idx];
-
-  const handleAnswer = (answer: string) => {
-    //
-    if (Number.isNaN(Number(answer))) {
-      alert("Please enter a valid number");
-      return;
-    }
-    if (!currentOperation) {
-      console.error("No operation to solve");
-      return;
-    }
-    const newAnswer: SolvedOperation = {
-      ...currentOperation,
-      at: new Date(),
-      answered: answer,
-    };
-    setAnswered((prev) => [...prev, newAnswer]);
-
-    //
-    setIdx((prev) => prev + 1);
-  };
-
-  const start = () => {
-    setIdx(0);
-    setOperations(generateOperations(100));
-    setAnswered([]);
-    setTime(def.initialTime);
-  };
-  useEffect(() => {
-    if (operations.length - 1 === idx) {
-      setIdx(-1);
-
-      setTime(0);
-    }
-  }, [idx, operations]);
-
-  useEffect(() => {
-    if (time > 0) {
-      const timeout = setTimeout(() => setTime(time - 1), 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, [time]);
-
-  return { currentOperation, answered, start, handleAnswer, time };
-};
-
-export const Board = () => {
-  const { currentOperation, time, start, handleAnswer, answered } = useMath();
-
-  return (
-    <section className="p-4 flex justify-center h-full flex-col gap-8 items-center">
-      {!time ? (
-        <MathIdlePage onStart={start} done={answered} />
-      ) : (
-        <Game
-          reset={start}
-          operation={currentOperation as Operation}
-          onSubmit={(o) => handleAnswer(o)}
-          time={time}
-        />
-      )}
-    </section>
-  );
-};

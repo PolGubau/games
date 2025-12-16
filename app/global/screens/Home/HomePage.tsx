@@ -1,42 +1,32 @@
 import { Link } from "react-router";
 import MainLayout from "../../Layouts/MainLayout";
-import { MathPage } from "../Math/Math";
-import MemoPage from "../Memo/Memo";
-import SnakeGame from "../snake/snake-game";
-import SudokuPage from "../sudoku/sudoku-lobby-page";
-import WordsMinutePage from "../words-minute/words-minute";
 export const games = [
   {
     name: "Memo",
     description: "Find all the pairs of tiles",
     link: "/memo",
-    element: <MemoPage />,
   },
   {
     name: "Words per minute",
     description: "Test your typing speed",
     link: "/words-per-minute",
-    element: <WordsMinutePage />,
   },
   {
     name: "Sudoku",
     description: "Fill the board with numbers",
     link: "/sudoku",
-    element: <SudokuPage />,
   },
 
   {
     name: "Snake",
     description: "Eat the food and grow",
     link: "/snake",
-    element: <SnakeGame />,
   },
 
   {
     name: "Math",
     description: "Solve easy operations",
     link: "/math",
-    element: <MathPage />,
   },
 ];
 const HomePage = () => {

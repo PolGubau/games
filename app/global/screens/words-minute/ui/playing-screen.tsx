@@ -31,7 +31,7 @@ export function PlayingScreen({
 
   // Check if each character is correct
   const getCharacterClass = (index: number) => {
-    if (index >= typedWord.length) return "text-gray-400";
+    if (index >= typedWord.length) return "text-muted-foreground";
     if (typedWord[index]?.toLowerCase() === currentWord[index]?.toLowerCase()) {
       return "text-green-500";
     }
@@ -66,25 +66,28 @@ export function PlayingScreen({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <form onSubmit={onSubmit} className="relative flex items-center">
+        <form onSubmit={onSubmit} className="relative flex items-center flex-col">
           {/* Target word (background) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="text-5xl md:text-7xl font-mono opacity-30">
-              {currentWord.split("").map((char, index) => (
-                <span key={index} className={getCharacterClass(index)}>
-                  {char}
-                </span>
-              ))}
-            </div>
-          </div>
+          <motion.div className=" inset-0 flex items-center justify-center pointer-events-none">
+            <label htmlFor="input">
+              <div className="text-5xl md:text-7xl font-mono opacity-30">
+                {currentWord.split("").map((char, index) => (
+                  <span key={index} className={getCharacterClass(index)}>
+                    {char}
+                  </span>
+                ))}
+              </div></label>
+          </motion.div>
 
           {/* Input field */}
           <input
             ref={inputRef}
             autoComplete="off"
             autoFocus
+            name="input"
             spellCheck={false}
             autoCapitalize="off"
+            placeholder="..."
             autoCorrect="off"
             className="text-5xl md:text-7xl font-mono bg-transparent border-none focus:outline-none text-center caret-primary min-w-[300px] md:min-w-[500px]"
             type="text"
@@ -107,9 +110,9 @@ export function PlayingScreen({
 
       {/* Visual Background Effect */}
       <div
-        className="fixed inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none -z-10"
+        className="fixed inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none -z-10"
         style={{
-          opacity: Math.min(progressPercentage / 100, 0.3),
+          opacity: 0.1 + (characterCount / 500) * 0.3,
         }}
       />
     </div>

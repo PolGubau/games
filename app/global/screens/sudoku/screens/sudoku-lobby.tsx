@@ -5,6 +5,7 @@ import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader,
 import { Item, ItemContent, ItemDescription, ItemTitle } from "~/components/ui/item";
 import { Slider } from "~/components/ui/slider";
 import type { GenerateBoardCells } from "../hooks/use-sudoku";
+import { Play } from "lucide-react";
 interface Props {
   onStart: GenerateBoardCells;
 }
@@ -50,7 +51,10 @@ const SudokuLobby: React.FC<Props> = ({ onStart }: Props) => {
         </CardContent>
         <CardFooter>
           <CardAction>
-            <Button onClick={() => onStart(difficulty)}>Start Game</Button>
+            <Button onClick={() => onStart(difficulty)}>Start Game
+              <Play />
+
+            </Button>
           </CardAction>
         </CardFooter>
       </Card>

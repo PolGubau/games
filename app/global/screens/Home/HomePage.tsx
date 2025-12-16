@@ -14,8 +14,8 @@ export const games = [
   },
   {
     name: "Words per minute",
-    description: "Type as many words as you can",
-    link: "/words-minute",
+    description: "Test your typing speed",
+    link: "/words-per-minute",
     element: <WordsMinutePage />,
   },
   {

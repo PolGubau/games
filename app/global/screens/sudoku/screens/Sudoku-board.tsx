@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { GoHomeButton } from "~/components/go-home-button";
 import BoardLayout from "../../../Layouts/BoardLayout";
-import HeartNav from "../components/heartNav";
+import HeartNav from "../ui/heart-nav";
 import { calculateTimeDiff, useSudoku } from "../hooks/use-sudoku";
 import SudokuLost from "./sudoku-lost";
 import SudokuWin from "./sudoku-win";

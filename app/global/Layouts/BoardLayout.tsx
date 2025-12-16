@@ -8,7 +8,7 @@ const BoardLayout: React.FC<Props> = ({ children, title }) => {
 
   return (
     <MainLayout title={title}>
-      <div className="max-w-5xl mx-auto grid w-full">
+      <div className="max-w-5xl mx-auto grid w-full  ">
 
         {children}
       </div>

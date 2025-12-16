@@ -23,8 +23,8 @@ More info at https://polgubau.com
 _____________________________________________________
 `);
   return (
-    <main className="bg-background p-4 md:p-6 w-screen h-dvh grid grid-rows-[auto_1fr] gap-2 md:gap-4 overflow-hidden">
-      <nav className="w-full md:rounded-full justify-start gap-2 flex items-center z-10">
+    <main className="bg-background w-screen h-dvh grid grid-rows-[auto_1fr] md:gap-4 overflow-hidden">
+      <nav className="w-full md:rounded-full justify-start gap-2 flex items-center z-10  p-2 md:p-6 ">
         <Link to="/" title="Go to main screen">
           <Gamepad2 className="size-4 md:size-8" />
         </Link>
@@ -36,7 +36,7 @@ _____________________________________________________
         </hgroup>
       </nav>
 
-      <div className="w-full h-auto grid gap-2 bg-secondary-50 overflow-auto">
+      <div className="w-full h-auto grid gap-2 bg-secondary-50 overflow-y-auto p-2 md:p-6 ">
         {children}
       </div>
     </main>

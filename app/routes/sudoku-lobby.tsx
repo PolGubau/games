@@ -1,5 +1,5 @@
 import SudokuPage from "~/global/screens/sudoku/sudoku-lobby-page";
-import type { Route } from "./+types/sudoku";
+import type { Route } from "./+types/sudoku-lobby";
 
 export function meta({ }: Route.MetaArgs) {
   return [

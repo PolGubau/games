@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import type { Direction, GameState, GameStats, Tile } from "../domain/types";
+import type { Direction, GameState, GameStats } from "../domain/types";
 import {
   createInitialState,
   createRandomTile,
-  getBestScore,
   getLargestTile,
   hasLost,
   hasWon,

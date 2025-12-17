@@ -14,8 +14,10 @@ export function Game2048Screen() {
 
   return (
     <BoardLayout title="2048">
-      <div className="flex flex-col gap-4">
-        <GoHomeButton />
+      <div className="flex flex-col gap-1">
+        <div className="flex">
+          <GoHomeButton />
+        </div>
         <header className="flex items-center justify-between">
           <h1 className="text-5xl font-bold text-primary">2048</h1>
 
@@ -34,7 +36,7 @@ export function Game2048Screen() {
           </ButtonGroup>
         </header>
 
-        <div className="grid md:grid-cols-[auto_1fr] gap-4">
+        <div className="grid md:grid-cols-[auto_1fr] gap-4 mt-2">
 
           <section id="scores" className="flex gap-4 md:flex-col flex-1 min-w-50">
             <ScoreCard label="Score" value={stats.score} icon={<CheckCircle2Icon className="size-5" />} />

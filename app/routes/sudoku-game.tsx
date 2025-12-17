@@ -1,6 +1,6 @@
 import SudokuBoardLayout from "~/global/screens/sudoku/screens/Sudoku-board";
-import type { Route } from "./+types/sudoku";
-
+import type { Route } from "./+types/sudoku-game";
+ 
 export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Sudoku Game | Games - Pol Gubau Amores" },

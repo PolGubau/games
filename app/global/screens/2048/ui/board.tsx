@@ -46,27 +46,36 @@ export function Board({ tiles, onSwipe }: BoardProps) {
   );
 
   const gridSize = GAME_2048_CONFIG.GRID_SIZE;
+  const gridStyle = {
+    gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+    gridTemplateRows: `repeat(${gridSize}, 1fr)`,
+  };
 
   return (
     <div
       ref={boardRef}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="relative aspect-square w-full bg-primary rounded-xl p-2 gap-2 grid"
-      style={{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }}
+      className="relative aspect-square w-full bg-primary rounded-xl p-2"
     >
-      {/* Background cells */}
-      {Array.from({ length: gridSize * gridSize }).map((_, i) => (
-        <div
-          key={i}
-          className="aspect-square bg-muted-foreground rounded-lg"
-        />
-      ))}
+      {/* Background grid */}
+      <div className="grid gap-2 w-full h-full" style={gridStyle}>
+        {Array.from({ length: gridSize * gridSize }, (_, i) => (
+          <div key={i} className="bg-muted-foreground rounded-lg" />
+        ))}
+      </div>
 
-      {/* Tiles */}
-      {tiles.map((tile) => (
-        <TileComponent key={tile.id} tile={tile} />
-      ))}
+      {/* Tiles layer */}
+      <div className="absolute inset-2 grid gap-2" style={gridStyle}>
+        {/* Ghost cells maintain grid structure */}
+        {/* {Array.from({ length: gridSize * gridSize }, (_, i) => (
+          <div key={`ghost-${i}`} className="pointer-events-none" />
+        ))} */}
+        {/* Active tiles */}
+        {tiles.map((tile) => (
+          <TileComponent key={tile.id} tile={tile} />
+        ))}
+      </div>
     </div>
   );
 }

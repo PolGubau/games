@@ -43,7 +43,7 @@ export function PlayingScreen({
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-secondary z-50">
         <motion.div
-          className="h-full bg-primary"
+          className="h-full bg-primary pointer-events-none"
           initial={{ width: 0 }}
           animate={{ width: `${progressPercentage}%` }}
           transition={{ duration: 0.3 }}
@@ -89,7 +89,7 @@ export function PlayingScreen({
             autoCapitalize="off"
             placeholder="..."
             autoCorrect="off"
-            className="text-5xl md:text-7xl font-mono bg-transparent border-none focus:outline-none text-center caret-primary min-w-[300px] md:min-w-[500px]"
+            className="xl:text-7xl font-mono bg-transparent border-none focus:outline-none text-center caret-primary "
             type="text"
             value={typedWord}
             onChange={(e) => onInput(e.target.value)}
@@ -110,7 +110,7 @@ export function PlayingScreen({
 
       {/* Visual Background Effect */}
       <div
-        className="fixed inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none -z-10"
+        className="fixed inset-0 bg-linear-to-br from-primary/20 to-transparent pointer-events-none -z-10"
         style={{
           opacity: 0.1 + (characterCount / 500) * 0.3,
         }}

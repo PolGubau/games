@@ -18,7 +18,7 @@ const IdlePage: React.FC<Props> = ({
 	characterCount,
 }: Props) => {
 	return (
-		<section className="text-center grid gap-4 md:grid-rows-[1fr,auto] grid-rows-1 items-center  h-full md:h-fit ">
+		<section className="text-center grid gap-4 md:grid-rows-[1fr,auto] grid-rows-1 items-center h-full md:h-fit ">
 			<div className="flex gap-6 flex-col justify-center items-center  h-full md:h-fit">
 				{characterCount > 0 ? (
 					<>

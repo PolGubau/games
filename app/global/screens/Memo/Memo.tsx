@@ -1,5 +1,5 @@
 import { ArrowLeft, BadgeQuestionMark, Lightbulb, RotateCcw } from "lucide-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router";
 import { Button, buttonVariants } from "~/components/ui/button";
 import { ButtonGroup } from "~/components/ui/button-group";

@@ -1,11 +1,10 @@
+import { RotateCcw, Trophy } from "lucide-react";
 import { motion } from "motion/react";
-import { Trophy, RotateCcw, Home } from "lucide-react";
-import { Button } from "~/components/ui/button";
-import { Link } from "react-router";
-import type { GameStats } from "../domain/types";
-import { formatGameTime, getPerformanceLevel } from "../domain/utilities";
 import ConfettiExplosion from "react-confetti-explosion";
 import { GoHomeButton } from "~/components/go-home-button";
+import { Button } from "~/components/ui/button";
+import type { GameStats } from "../domain/types";
+import { formatGameTime, getPerformanceLevel } from "../domain/utilities";
 
 interface GameOverScreenProps {
   stats: GameStats;

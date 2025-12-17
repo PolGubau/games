@@ -1,15 +1,11 @@
-import { motion } from "motion/react";
-import { ArrowLeft, Play } from "lucide-react";
-import { Link } from "react-router";
+import { Play } from "lucide-react";
+import { GoHomeButton } from "~/components/go-home-button";
 import { Button } from "~/components/ui/button";
-import { Tooltip } from "~/components/ui/tooltip";
+import { ButtonGroup } from "~/components/ui/button-group";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card";
+import { Item, ItemContent, ItemDescription, ItemTitle } from "~/components/ui/item";
 import type { GameMode } from "../domain/types";
 import { WPM_CONFIG } from "../domain/types";
-import { ButtonGroup } from "~/components/ui/button-group";
-import { GoHomeButton } from "~/components/go-home-button";
-import { Slider } from "@radix-ui/react-slider";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from "~/components/ui/card";
-import { Item, ItemContent, ItemTitle, ItemDescription } from "~/components/ui/item";
 
 interface IdleScreenProps {
   onStart: () => void;

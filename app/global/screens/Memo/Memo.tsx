@@ -20,7 +20,7 @@ export interface Tile {
 }
 export type TileId = Tile["id"];
 
-const MemoPage = () => {
+export const MemoPage = () => {
   return (
     <BoardLayout title="Memo">
       <Board />
@@ -178,4 +178,3 @@ const Board = () => {
   );
 };
 
-export default MemoPage;

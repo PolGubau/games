@@ -1,4 +1,4 @@
-import MemoPage from "~/global/screens/Memo/Memo";
+import { MemoPage } from "~/global/screens/Memo/Memo";
 import type { Route } from "./+types/memo";
 
 export function meta({ }: Route.MetaArgs) {

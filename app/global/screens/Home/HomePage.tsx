@@ -28,6 +28,11 @@ export const games = [
     description: "Solve easy operations",
     link: "/math",
   },
+  {
+    name: "2048",
+    description: "Reach the 2048 tile",
+    link: "/2048",
+  },
 ];
 const HomePage = () => {
 

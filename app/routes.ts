@@ -7,4 +7,5 @@ export default [
   route("words-per-minute", "routes/words-minute.tsx"),
   route("math", "routes/math.tsx"),
   route("snake", "routes/snake.tsx"),
+  route("2048", "routes/2048.tsx"),
 ] satisfies RouteConfig;

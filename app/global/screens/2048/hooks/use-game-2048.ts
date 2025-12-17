@@ -100,7 +100,7 @@ export function useGame2048() {
       };
 
       // Check win/loss conditions
-      if (hasWon(newTiles) && gameState.status !== "won") {
+      if (hasWon(newTiles)) {
         newState.status = "won";
       } else if (hasLost(newTiles)) {
         newState.status = "lost";

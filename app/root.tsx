@@ -9,6 +9,8 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { InstallPWA } from "./components/install-pwa";
+import { useServiceWorker } from "./hooks/use-service-worker";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -28,7 +30,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#ff4" />
+        <meta name="description" content="Play beautiful singleplayer minigames: Snake, 2048, Minesweeper, Sudoku, and more!" />
+
+        {/* PWA & Mobile */}
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Pol/Games" />
+
+        {/* Icons */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/brand/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32x32.png" />
+
         <Meta />
         <Links />
       </head>
@@ -42,7 +59,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  useServiceWorker();
+
+  return (
+    <>
+      <Outlet />
+      <InstallPWA />
+    </>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

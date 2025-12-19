@@ -26,7 +26,6 @@ const SudokuLobby: React.FC<Props> = ({ onStart }: Props) => {
           <CardDescription>Customize your game settings below</CardDescription>
         </CardHeader>
         <CardContent>
-
           <Item variant="muted">
             <ItemContent>
               <ItemTitle>Difficulty</ItemTitle>
@@ -56,7 +55,6 @@ const SudokuLobby: React.FC<Props> = ({ onStart }: Props) => {
           <CardAction>
             <Button onClick={() => onStart(difficulty)}>Start Game
               <Play />
-
             </Button>
           </CardAction>
         </CardFooter>

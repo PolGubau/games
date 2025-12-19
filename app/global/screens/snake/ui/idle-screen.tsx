@@ -42,7 +42,7 @@ export function IdleScreen({
           </>
         ) : (
           <>
-            <div className="text-6xl">🐍</div>
+            <span className="text-6xl">🐍</span>
             <h3 className="text-4xl md:text-6xl max-w-150 font-bold">Snake Game</h3>
             <p className="text-lg text-muted-foreground">
               Eat food, grow long, don't crash!
@@ -58,17 +58,17 @@ export function IdleScreen({
         )}
 
         {/* Difficulty Selection */}
-        <div className="flex gap-4 items-center mt-6">
+        <div className="grid md:grid-cols-[auto_1fr] gap-4 items-center mt-6">
           <label className="text-sm font-medium">Difficulty:</label>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap justify-center md:justify-start">
             {(Object.keys(DIFFICULTY_LEVELS) as DifficultyLevel[]).map((level) => (
               <button
                 key={level}
                 type="button"
                 onClick={() => onDifficultyChange(level)}
                 className={`px-4 py-2 rounded-lg transition-colors ${difficulty === level
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                   }`}
               >
                 {level}

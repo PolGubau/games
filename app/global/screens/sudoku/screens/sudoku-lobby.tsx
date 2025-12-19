@@ -19,12 +19,15 @@ const SudokuLobby: React.FC<Props> = ({ onStart }: Props) => {
       </header>
       <Card>
         <CardHeader>
-          <CardTitle>Welcome to Sudoku</CardTitle>
+          <CardTitle className="flex flex-col gap-6">
+            <span className="text-6xl">🧩</span>
+            Sudoku
+          </CardTitle>
           <CardDescription>Customize your game settings below</CardDescription>
         </CardHeader>
         <CardContent>
 
-          <Item variant="outline">
+          <Item variant="muted">
             <ItemContent>
               <ItemTitle>Difficulty</ItemTitle>
               <ItemDescription>

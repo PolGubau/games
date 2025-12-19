@@ -36,12 +36,14 @@ export function IdleScreen({
       </header>
       <Card>
         <CardHeader>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle className="flex flex-col gap-6">
+            <span className="text-6xl">🎹</span>
+            {title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
         <CardContent >
 
-          <Item variant="outline">
+          <Item variant="muted">
             <ItemContent>
               <ItemTitle>Game Mode</ItemTitle>
               <ItemDescription>
@@ -73,7 +75,7 @@ export function IdleScreen({
 
 
           {/*  */}
-          <Item variant="outline">
+          <Item variant="muted">
             <ItemContent>
               <ItemTitle>Time Limit</ItemTitle>
               <ItemDescription>Choose how long each typing test will last</ItemDescription>

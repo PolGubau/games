@@ -63,7 +63,7 @@ export function IdleScreen({
         )}
 
         {/* Difficulty Selection */}
-        <div className="flex gap-4 items-center mt-6">
+        <div className="grid md:grid-cols-[auto_1fr] gap-4 items-center mt-6">
           <label className="text-sm font-medium">Difficulty:</label>
           <div className="flex gap-2">
             {(Object.keys(DIFFICULTY_LEVELS) as DifficultyLevel[]).map((level) => (
@@ -72,8 +72,8 @@ export function IdleScreen({
                 type="button"
                 onClick={() => onDifficultyChange(level)}
                 className={`px-4 py-2 rounded-lg transition-colors ${difficulty === level
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                   }`}
               >
                 {level}
@@ -89,7 +89,7 @@ export function IdleScreen({
         </p>
 
         {/* Time Selection */}
-        <div className="flex gap-4 items-center mt-2">
+        <div className="grid md:grid-cols-[auto_1fr] gap-4 items-center mt-6">
           <label className="text-sm font-medium">Time Limit:</label>
           <div className="flex gap-2">
             {MATH_CONFIG.TIME_OPTIONS.map((time) => (
@@ -98,8 +98,8 @@ export function IdleScreen({
                 type="button"
                 onClick={() => onTimeChange(time)}
                 className={`px-4 py-2 rounded-lg transition-colors ${timeLimit === time
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                   }`}
               >
                 {time}s

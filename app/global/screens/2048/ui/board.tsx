@@ -14,14 +14,20 @@ export function Board({ tiles, onSwipe }: BoardProps) {
 
   // Handle touch/swipe
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    e.preventDefault(); // Prevent pull-to-refresh
     touchStartRef.current = {
       x: e.touches[0].clientX,
       y: e.touches[0].clientY,
     };
   }, []);
 
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    e.preventDefault(); // Prevent scrolling during swipe
+  }, []);
+
   const handleTouchEnd = useCallback(
     (e: React.TouchEvent) => {
+      e.preventDefault(); // Prevent pull-to-refresh
       if (!touchStartRef.current) return;
 
       const deltaX = e.changedTouches[0].clientX - touchStartRef.current.x;
@@ -55,8 +61,10 @@ export function Board({ tiles, onSwipe }: BoardProps) {
     <div
       ref={boardRef}
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       className="relative aspect-square w-full bg-primary rounded-xl p-2"
+      style={{ touchAction: "none" }}
     >
       {/* Background grid */}
       <div className="grid gap-2 w-full h-full" style={gridStyle}>

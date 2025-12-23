@@ -28,6 +28,7 @@ export type GameState = {
   bestScore: number;
   status: GameStatus;
   canUndo: boolean;
+  hasWonBefore: boolean; // Track if player already won and chose to continue
 };
 
 export type GameStats = {

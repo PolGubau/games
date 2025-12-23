@@ -26,6 +26,7 @@ export function createInitialState(): GameState {
     bestScore: getBestScore(),
     status: "playing",
     canUndo: false,
+    hasWonBefore: false,
   };
 }
 

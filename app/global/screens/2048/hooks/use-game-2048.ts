@@ -97,11 +97,14 @@ export function useGame2048() {
         bestScore: newBestScore,
         status: "playing",
         canUndo: true,
+        hasWonBefore: gameState.hasWonBefore,
       };
 
       // Check win/loss conditions
-      if (hasWon(newTiles)) {
+      // Only show win screen if player hasn't won before
+      if (!gameState.hasWonBefore && hasWon(newTiles)) {
         newState.status = "won";
+        newState.hasWonBefore = true;
       } else if (hasLost(newTiles)) {
         newState.status = "lost";
       }
@@ -121,7 +124,11 @@ export function useGame2048() {
 
   // Continue playing after winning
   const continueGame = useCallback(() => {
-    setGameState((prev) => ({ ...prev, status: "playing" }));
+    setGameState((prev) => ({ 
+      ...prev, 
+      status: "playing",
+      hasWonBefore: true // Mark that player chose to continue after winning
+    }));
   }, []);
 
   // Undo last move

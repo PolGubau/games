@@ -124,10 +124,10 @@ export function useGame2048() {
 
   // Continue playing after winning
   const continueGame = useCallback(() => {
-    setGameState((prev) => ({ 
-      ...prev, 
+    setGameState((prev) => ({
+      ...prev,
       status: "playing",
-      hasWonBefore: true // Mark that player chose to continue after winning
+      hasWonBefore: true, // Mark that player chose to continue after winning
     }));
   }, []);
 

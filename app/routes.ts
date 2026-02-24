@@ -8,4 +8,5 @@ export default [
   route("math", "routes/math.tsx"),
   route("snake", "routes/snake.tsx"),
   route("2048", "routes/2048.tsx"),
+  route("tictactoe", "routes/tictactoe.tsx"),
 ] satisfies RouteConfig;

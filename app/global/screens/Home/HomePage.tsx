@@ -33,6 +33,11 @@ export const games = [
     description: "Reach the 2048 tile",
     link: "/2048",
   },
+  {
+    name: "Tic-Tac-Toe",
+    description: "3 en raya, vs human or AI",
+    link: "/tictactoe",
+  },
 ];
 const HomePage = () => {
 

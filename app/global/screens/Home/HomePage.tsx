@@ -38,6 +38,11 @@ export const games = [
     description: "3 en raya, vs human or AI",
     link: "/tictactoe",
   },
+  {
+    name: "Elige al azar",
+    description: "Pon dedos, cuenta atrás, ¡un elegido!",
+    link: "/picker",
+  },
 ];
 const HomePage = () => {
 

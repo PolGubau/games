@@ -9,4 +9,5 @@ export default [
   route("snake", "routes/snake.tsx"),
   route("2048", "routes/2048.tsx"),
   route("tictactoe", "routes/tictactoe.tsx"),
+  route("picker", "routes/picker.tsx"),
 ] satisfies RouteConfig;
